@@ -1,0 +1,47 @@
+---
+export interface Props {
+  variant?: "primary" | "ghost" | "white" | "ghost-light";
+  size?: "md" | "lg";
+  href?: string;
+  class?: string;
+  id?: string;
+}
+
+const {
+  variant = "primary",
+  size = "md",
+  href,
+  class: className = "",
+  id,
+} = Astro.props;
+
+const base =
+  "inline-flex items-center gap-2 rounded-full font-semibold whitespace-nowrap cursor-pointer border-none transition-all duration-300";
+
+const sizes = {
+  md: "px-[1.4em] py-[.85em] text-[.96rem]",
+  lg: "px-[1.8em] py-[1.05em] text-[1.02rem]",
+};
+
+const variants: Record<string, string> = {
+  primary:
+    "text-white shadow-glow shadow-[inset_0_1px_0_rgba(255,255,255,.4)] hover:-translate-y-0.5 hover:shadow-[0_28px_60px_-12px_rgba(17,131,214,.7),inset_0_1px_0_rgba(255,255,255,.5)]",
+  ghost:
+    "bg-white/70 backdrop-blur-md text-ink border border-[var(--line-strong)] shadow-sm hover:-translate-y-0.5 hover:border-ocean-400 hover:shadow-md",
+  white:
+    "bg-white text-ocean-700 hover:-translate-y-0.5 hover:shadow-[0_24px_50px_-16px_rgba(0,0,0,.35)]",
+  "ghost-light":
+    "bg-white/10 backdrop-blur-md text-white border border-white/40 hover:-translate-y-0.5 hover:bg-white/20",
+};
+
+const Tag = href ? "a" : "button";
+const hrefAttr = href ? { href } : {};
+---
+
+<Tag
+  {...hrefAttr}
+  id={id}
+  class={`grad-ocean ${base} ${sizes[size]} ${variants[variant]} ${className}`}
+>
+  <slot />
+</Tag>

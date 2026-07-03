@@ -1,0 +1,3204 @@
+<!doctype html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Lapakku — Bangun Toko Online-mu Tanpa Ribet</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            :root {
+                --ink: #07263b;
+                --ink-soft: #456178;
+                --ink-faint: #7c93a4;
+                --ocean-950: #042438;
+                --ocean-900: #062e4a;
+                --ocean-700: #0a5c9c;
+                --ocean-600: #0b6fbe;
+                --ocean-500: #1183d6;
+                --ocean-400: #36a0e8;
+                --cyan: #1bc4dc;
+                --teal: #2fd3c0;
+                --bg: #ffffff;
+                --bg-soft: #f1f8ff;
+                --bg-soft-2: #e5f1fc;
+                --bg-deep: #04263e;
+                --line: rgba(11, 111, 190, 0.14);
+                --line-strong: rgba(11, 111, 190, 0.22);
+                --glass: rgba(255, 255, 255, 0.66);
+                --shadow-sm: 0 2px 8px rgba(8, 70, 124, 0.08);
+                --shadow-md: 0 18px 40px -18px rgba(8, 70, 124, 0.34);
+                --shadow-lg: 0 40px 80px -28px rgba(8, 70, 124, 0.42);
+                --shadow-glow: 0 20px 50px -12px rgba(17, 131, 214, 0.55);
+                --grad-ocean: linear-gradient(
+                    135deg,
+                    #0b6fbe 0%,
+                    #1183d6 42%,
+                    #1bc4dc 100%
+                );
+                --grad-ocean-soft: linear-gradient(
+                    135deg,
+                    #36a0e8 0%,
+                    #1bc4dc 100%
+                );
+                --r-sm: 14px;
+                --r-md: 20px;
+                --r-lg: 28px;
+                --r-xl: 36px;
+                --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            html {
+                scroll-behavior: smooth;
+                -webkit-text-size-adjust: 100%;
+            }
+            body {
+                font-family: "Plus Jakarta Sans", sans-serif;
+                color: var(--ink);
+                background: var(--bg);
+                line-height: 1.6;
+                overflow-x: hidden;
+                -webkit-font-smoothing: antialiased;
+                text-rendering: optimizeLegibility;
+            }
+            h1,
+            h2,
+            h3,
+            h4 {
+                font-family: "Bricolage Grotesque", sans-serif;
+                line-height: 1.05;
+                letter-spacing: -0.02em;
+                font-weight: 700;
+            }
+            a {
+                color: inherit;
+                text-decoration: none;
+            }
+            img {
+                max-width: 100%;
+                display: block;
+            }
+            ::selection {
+                background: rgba(27, 196, 220, 0.3);
+            }
+
+            .wrap {
+                width: min(1200px, 92vw);
+                margin-inline: auto;
+            }
+
+            /* grain overlay */
+            .grain {
+                position: fixed;
+                inset: 0;
+                z-index: 9999;
+                pointer-events: none;
+                opacity: 0.035;
+                mix-blend-mode: multiply;
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            }
+
+            /* ===== buttons ===== */
+            .btn {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.55em;
+                padding: 0.85em 1.4em;
+                border-radius: 999px;
+                font-weight: 600;
+                font-size: 0.96rem;
+                cursor: pointer;
+                border: none;
+                transition:
+                    transform 0.35s var(--ease),
+                    box-shadow 0.35s var(--ease),
+                    background 0.3s;
+                white-space: nowrap;
+            }
+            .btn svg {
+                width: 1.05em;
+                height: 1.05em;
+            }
+            .btn-primary {
+                color: #fff;
+                background: var(--grad-ocean);
+                box-shadow:
+                    var(--shadow-glow),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+                position: relative;
+            }
+            .btn-primary:hover {
+                transform: translateY(-2px);
+                box-shadow:
+                    0 28px 60px -12px rgba(17, 131, 214, 0.7),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+            }
+            .btn-ghost {
+                background: var(--glass);
+                color: var(--ink);
+                border: 1px solid var(--line-strong);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                box-shadow: var(--shadow-sm);
+            }
+            .btn-ghost:hover {
+                transform: translateY(-2px);
+                border-color: var(--ocean-400);
+                box-shadow: var(--shadow-md);
+            }
+            .btn-lg {
+                padding: 1.05em 1.8em;
+                font-size: 1.02rem;
+            }
+            .btn-white {
+                background: #fff;
+                color: var(--ocean-700);
+            }
+            .btn-white:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 24px 50px -16px rgba(0, 0, 0, 0.35);
+            }
+
+            /* ===== nav ===== */
+            header {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 1000;
+                transition: all 0.4s var(--ease);
+            }
+            .nav {
+                margin-top: 18px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0.7rem 0.7rem 0.7rem 1.3rem;
+                border-radius: 999px;
+                background: rgba(255, 255, 255, 0.55);
+                border: 1px solid rgba(255, 255, 255, 0.7);
+                backdrop-filter: blur(18px) saturate(140%);
+                -webkit-backdrop-filter: blur(18px) saturate(140%);
+                box-shadow: 0 10px 30px -14px rgba(8, 70, 124, 0.28);
+                transition: all 0.4s var(--ease);
+            }
+            header.scrolled .nav {
+                margin-top: 10px;
+                background: rgba(255, 255, 255, 0.82);
+                box-shadow: 0 14px 34px -16px rgba(8, 70, 124, 0.4);
+            }
+            .logo {
+                display: flex;
+                align-items: center;
+                gap: 0.6rem;
+                font-family: "Bricolage Grotesque";
+                font-weight: 800;
+                font-size: 1.32rem;
+                letter-spacing: -0.03em;
+            }
+            .logo .mark {
+                width: 38px;
+                height: 38px;
+                border-radius: 11px;
+                background: var(--grad-ocean);
+                display: grid;
+                place-items: center;
+                box-shadow: var(--shadow-glow);
+                position: relative;
+                overflow: hidden;
+                flex: none;
+            }
+            .logo .mark::after {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(
+                    180deg,
+                    rgba(255, 255, 255, 0.5),
+                    transparent 55%
+                );
+            }
+            .logo .mark svg {
+                width: 22px;
+                height: 22px;
+                position: relative;
+                z-index: 1;
+            }
+            .logo b {
+                color: var(--ocean-700);
+            }
+            .nav-links {
+                display: flex;
+                align-items: center;
+                gap: 0.4rem;
+            }
+            .nav-links a {
+                padding: 0.5rem 0.85rem;
+                border-radius: 999px;
+                font-weight: 500;
+                font-size: 0.93rem;
+                color: var(--ink-soft);
+                transition: all 0.25s;
+            }
+            .nav-links a:hover {
+                color: var(--ocean-700);
+                background: rgba(17, 131, 214, 0.08);
+            }
+            .nav-cta {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+            .nav-cta .login {
+                font-weight: 600;
+                font-size: 0.93rem;
+                padding: 0.6rem 0.9rem;
+                color: var(--ink);
+            }
+            .burger {
+                display: none;
+                width: 44px;
+                height: 44px;
+                border-radius: 12px;
+                background: var(--glass);
+                border: 1px solid var(--line);
+                place-items: center;
+                cursor: pointer;
+            }
+            .burger span {
+                display: block;
+                width: 18px;
+                height: 2px;
+                background: var(--ink);
+                border-radius: 2px;
+                position: relative;
+            }
+            .burger span::before,
+            .burger span::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                width: 18px;
+                height: 2px;
+                background: var(--ink);
+                border-radius: 2px;
+            }
+            .burger span::before {
+                top: -6px;
+            }
+            .burger span::after {
+                top: 6px;
+            }
+
+            /* ===== hero ===== */
+            .hero {
+                position: relative;
+                padding: 170px 0 90px;
+                overflow: hidden;
+            }
+            .hero-bg {
+                position: absolute;
+                inset: 0;
+                z-index: -2;
+                background:
+                    radial-gradient(
+                        120% 80% at 78% 8%,
+                        rgba(27, 196, 220, 0.22),
+                        transparent 55%
+                    ),
+                    radial-gradient(
+                        100% 80% at 8% 0%,
+                        rgba(17, 131, 214, 0.18),
+                        transparent 50%
+                    ),
+                    linear-gradient(180deg, #f4faff 0%, #ffffff 70%);
+            }
+            .blob {
+                position: absolute;
+                border-radius: 50%;
+                filter: blur(70px);
+                opacity: 0.55;
+                z-index: -1;
+                animation: float 14s ease-in-out infinite;
+            }
+            .blob.b1 {
+                width: 460px;
+                height: 460px;
+                background: radial-gradient(circle, #36a0e8, transparent 70%);
+                top: -120px;
+                right: -80px;
+            }
+            .blob.b2 {
+                width: 380px;
+                height: 380px;
+                background: radial-gradient(circle, #2fd3c0, transparent 70%);
+                bottom: -120px;
+                left: -100px;
+                animation-delay: -7s;
+            }
+            @keyframes float {
+                0%,
+                100% {
+                    transform: translate(0, 0) scale(1);
+                }
+                50% {
+                    transform: translate(20px, -30px) scale(1.08);
+                }
+            }
+
+            .hero-grid {
+                display: grid;
+                grid-template-columns: 1.05fr 0.95fr;
+                gap: 48px;
+                align-items: center;
+            }
+            .eyebrow {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.55rem;
+                padding: 0.45rem 0.45rem 0.45rem 0.8rem;
+                background: var(--glass);
+                border: 1px solid var(--line-strong);
+                border-radius: 999px;
+                font-size: 0.83rem;
+                font-weight: 600;
+                color: var(--ocean-700);
+                box-shadow: var(--shadow-sm);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                margin-bottom: 26px;
+            }
+            .eyebrow .tag {
+                background: var(--grad-ocean);
+                color: #fff;
+                padding: 0.22rem 0.6rem;
+                border-radius: 999px;
+                font-size: 0.72rem;
+                letter-spacing: 0.04em;
+                text-transform: uppercase;
+            }
+            .hero h1 {
+                font-size: clamp(2.6rem, 5.4vw, 4.3rem);
+                font-weight: 800;
+                letter-spacing: -0.035em;
+            }
+            .hero h1 .grad {
+                background: var(--grad-ocean);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+                position: relative;
+                white-space: nowrap;
+            }
+            .hero p.lead {
+                font-size: clamp(1.05rem, 1.5vw, 1.22rem);
+                color: var(--ink-soft);
+                max-width: 30em;
+                margin: 24px 0 34px;
+            }
+            .hero-actions {
+                display: flex;
+                gap: 0.8rem;
+                flex-wrap: wrap;
+                align-items: center;
+            }
+            .hero-note {
+                display: flex;
+                align-items: center;
+                gap: 1.4rem;
+                margin-top: 30px;
+                flex-wrap: wrap;
+            }
+            .avatars {
+                display: flex;
+            }
+            .avatars span {
+                width: 34px;
+                height: 34px;
+                border-radius: 50%;
+                border: 2px solid #fff;
+                margin-left: -10px;
+                background: var(--grad-ocean-soft);
+                box-shadow: var(--shadow-sm);
+            }
+            .avatars span:first-child {
+                margin-left: 0;
+            }
+            .avatars span:nth-child(2) {
+                background: linear-gradient(135deg, #2fd3c0, #1bc4dc);
+            }
+            .avatars span:nth-child(3) {
+                background: linear-gradient(135deg, #0b6fbe, #36a0e8);
+            }
+            .avatars span:nth-child(4) {
+                background: linear-gradient(135deg, #1183d6, #2fd3c0);
+            }
+            .hero-note small {
+                font-size: 0.85rem;
+                color: var(--ink-soft);
+                line-height: 1.35;
+            }
+            .hero-note b {
+                color: var(--ink);
+                font-weight: 700;
+            }
+            .stars {
+                color: #ffb020;
+                letter-spacing: 1px;
+                font-size: 0.85rem;
+            }
+
+            /* hero mockup */
+            .mock {
+                position: relative;
+                perspective: 1600px;
+            }
+            .browser {
+                border-radius: 22px;
+                background: #fff;
+                border: 1px solid var(--line);
+                box-shadow: var(--shadow-lg);
+                overflow: hidden;
+                transform: rotateY(-9deg) rotateX(4deg) rotate(1deg);
+                transform-style: preserve-3d;
+                transition: transform 0.6s var(--ease);
+            }
+            .mock:hover .browser {
+                transform: rotateY(-4deg) rotateX(2deg);
+            }
+            .browser .bar {
+                display: flex;
+                align-items: center;
+                gap: 0.45rem;
+                padding: 0.7rem 0.9rem;
+                border-bottom: 1px solid var(--line);
+                background: linear-gradient(180deg, #fff, #f6fbff);
+            }
+            .browser .bar i {
+                width: 11px;
+                height: 11px;
+                border-radius: 50%;
+                background: #e2edf6;
+                display: block;
+            }
+            .browser .bar i:nth-child(1) {
+                background: #ff6b6b;
+            }
+            .browser .bar i:nth-child(2) {
+                background: #ffd166;
+            }
+            .browser .bar i:nth-child(3) {
+                background: #2fd3c0;
+            }
+            .browser .url {
+                margin-left: 0.7rem;
+                flex: 1;
+                background: #eef5fb;
+                border-radius: 7px;
+                padding: 0.32rem 0.7rem;
+                font-size: 0.72rem;
+                color: var(--ink-faint);
+                font-weight: 500;
+            }
+            .store-head {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0.95rem 1.1rem;
+                border-bottom: 1px solid var(--line);
+            }
+            .store-head .brand {
+                display: flex;
+                align-items: center;
+                gap: 0.55rem;
+                font-weight: 800;
+                font-family: "Bricolage Grotesque";
+                font-size: 0.98rem;
+            }
+            .store-head .brand .b {
+                width: 28px;
+                height: 28px;
+                border-radius: 8px;
+                background: var(--grad-ocean);
+                display: grid;
+                place-items: center;
+                color: #fff;
+                font-size: 0.8rem;
+            }
+            .store-head .icons {
+                display: flex;
+                gap: 0.55rem;
+                color: var(--ink-faint);
+            }
+            .store-head .icons span {
+                width: 30px;
+                height: 30px;
+                border-radius: 9px;
+                background: #f2f8fd;
+                display: grid;
+                place-items: center;
+                position: relative;
+            }
+            .store-head .icons span:last-child::after {
+                content: "3";
+                position: absolute;
+                top: -4px;
+                right: -4px;
+                background: var(--cyan);
+                color: #fff;
+                font-size: 0.6rem;
+                font-weight: 700;
+                width: 15px;
+                height: 15px;
+                border-radius: 50%;
+                display: grid;
+                place-items: center;
+            }
+            .hero-banner {
+                margin: 0.9rem 1.1rem;
+                border-radius: 14px;
+                background: var(--grad-ocean);
+                padding: 1rem 1.1rem;
+                color: #fff;
+                position: relative;
+                overflow: hidden;
+                box-shadow: var(--shadow-glow);
+            }
+            .hero-banner::after {
+                content: "";
+                position: absolute;
+                width: 120px;
+                height: 120px;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.18);
+                top: -40px;
+                right: -20px;
+            }
+            .hero-banner small {
+                font-size: 0.68rem;
+                opacity: 0.85;
+                text-transform: uppercase;
+                letter-spacing: 0.08em;
+                font-weight: 600;
+            }
+            .hero-banner h5 {
+                font-family: "Bricolage Grotesque";
+                font-size: 1.15rem;
+                font-weight: 700;
+                margin-top: 0.15rem;
+            }
+            .hero-banner .pill {
+                display: inline-block;
+                margin-top: 0.5rem;
+                background: #fff;
+                color: var(--ocean-700);
+                font-size: 0.7rem;
+                font-weight: 700;
+                padding: 0.28rem 0.65rem;
+                border-radius: 999px;
+            }
+            .prod-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.7rem;
+                padding: 0.2rem 1.1rem 1.2rem;
+            }
+            .prod {
+                border: 1px solid var(--line);
+                border-radius: 12px;
+                overflow: hidden;
+                background: #fff;
+                transition: transform 0.3s;
+            }
+            .prod:hover {
+                transform: translateY(-3px);
+            }
+            .prod .thumb {
+                height: 54px;
+                background: linear-gradient(135deg, #e5f1fc, #d2e9fa);
+            }
+            .prod:nth-child(2) .thumb {
+                background: linear-gradient(135deg, #d9f4f0, #c3ecf6);
+            }
+            .prod:nth-child(3) .thumb {
+                background: linear-gradient(135deg, #e9eefb, #d7e6fa);
+            }
+            .prod:nth-child(4) .thumb {
+                background: linear-gradient(135deg, #fceee5, #fae0d2);
+            }
+            .prod:nth-child(5) .thumb {
+                background: linear-gradient(135deg, #e5f1fc, #cfe9fa);
+            }
+            .prod:nth-child(6) .thumb {
+                background: linear-gradient(135deg, #e6f8f4, #cdefec);
+            }
+            .prod .meta {
+                padding: 0.4rem 0.5rem 0.55rem;
+            }
+            .prod .meta .nm {
+                font-size: 0.62rem;
+                color: var(--ink-soft);
+                font-weight: 600;
+            }
+            .prod .meta .pr {
+                font-size: 0.72rem;
+                font-weight: 800;
+                color: var(--ocean-700);
+                margin-top: 0.1rem;
+            }
+            .prod .meta .rt {
+                font-size: 0.55rem;
+                color: var(--ink-faint);
+                margin-top: 0.1rem;
+            }
+
+            /* floating chips */
+            .chip {
+                position: absolute;
+                background: var(--glass);
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
+                border: 1px solid rgba(255, 255, 255, 0.8);
+                border-radius: 16px;
+                padding: 0.7rem 0.85rem;
+                box-shadow: var(--shadow-md);
+                z-index: 3;
+                animation: bob 5s ease-in-out infinite;
+            }
+            @keyframes bob {
+                0%,
+                100% {
+                    transform: translateY(0);
+                }
+                50% {
+                    transform: translateY(-9px);
+                }
+            }
+            .chip.c1 {
+                top: 6%;
+                left: -7%;
+                display: flex;
+                align-items: center;
+                gap: 0.6rem;
+            }
+            .chip.c1 .ic {
+                width: 34px;
+                height: 34px;
+                border-radius: 10px;
+                background: linear-gradient(135deg, #2fd3c0, #1bc4dc);
+                display: grid;
+                place-items: center;
+                color: #fff;
+            }
+            .chip.c1 small {
+                font-size: 0.66rem;
+                color: var(--ink-faint);
+                font-weight: 600;
+            }
+            .chip.c1 b {
+                font-size: 0.85rem;
+                display: block;
+                font-weight: 800;
+                color: var(--ink);
+            }
+            .chip.c2 {
+                bottom: 14%;
+                right: -8%;
+                animation-delay: -2.5s;
+                min-width: 160px;
+            }
+            .chip.c2 .row {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 0.4rem;
+            }
+            .chip.c2 small {
+                font-size: 0.66rem;
+                color: var(--ink-faint);
+                font-weight: 600;
+            }
+            .chip.c2 .up {
+                font-size: 0.62rem;
+                color: #16b07a;
+                font-weight: 700;
+                background: rgba(22, 176, 122, 0.12);
+                padding: 0.1rem 0.4rem;
+                border-radius: 6px;
+            }
+            .chip.c2 b {
+                font-size: 1.05rem;
+                font-weight: 800;
+                color: var(--ink);
+                font-family: "Bricolage Grotesque";
+            }
+            .spark {
+                display: flex;
+                align-items: flex-end;
+                gap: 3px;
+                height: 26px;
+                margin-top: 0.4rem;
+            }
+            .spark i {
+                flex: 1;
+                background: var(--grad-ocean);
+                border-radius: 3px;
+                display: block;
+            }
+            .chip.c3 {
+                top: 46%;
+                right: -11%;
+                animation-delay: -1.2s;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+            .chip.c3 .star {
+                color: #ffb020;
+            }
+            .chip.c3 b {
+                font-size: 0.92rem;
+                font-weight: 800;
+            }
+            .chip.c3 small {
+                font-size: 0.62rem;
+                color: var(--ink-faint);
+                display: block;
+            }
+
+            /* ===== marquee logos ===== */
+            .trust {
+                padding: 46px 0 10px;
+                text-align: center;
+            }
+            .trust p {
+                font-size: 0.82rem;
+                color: var(--ink-faint);
+                font-weight: 600;
+                letter-spacing: 0.04em;
+                text-transform: uppercase;
+                margin-bottom: 24px;
+            }
+            .marquee {
+                overflow: hidden;
+                -webkit-mask-image: linear-gradient(
+                    90deg,
+                    transparent,
+                    #000 12%,
+                    #000 88%,
+                    transparent
+                );
+                mask-image: linear-gradient(
+                    90deg,
+                    transparent,
+                    #000 12%,
+                    #000 88%,
+                    transparent
+                );
+            }
+            .marquee-track {
+                display: flex;
+                gap: 54px;
+                width: max-content;
+                animation: scroll 26s linear infinite;
+            }
+            .marquee:hover .marquee-track {
+                animation-play-state: paused;
+            }
+            @keyframes scroll {
+                to {
+                    transform: translateX(-50%);
+                }
+            }
+            .mlogo {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                color: var(--ink-faint);
+                font-weight: 700;
+                font-size: 1.05rem;
+                font-family: "Bricolage Grotesque";
+                opacity: 0.7;
+                transition: 0.3s;
+                white-space: nowrap;
+            }
+            .mlogo:hover {
+                opacity: 1;
+                color: var(--ocean-700);
+            }
+            .mlogo .d {
+                width: 26px;
+                height: 26px;
+                border-radius: 8px;
+                background: linear-gradient(
+                    135deg,
+                    var(--ocean-400),
+                    var(--cyan)
+                );
+                opacity: 0.85;
+            }
+
+            /* ===== section header ===== */
+            .sec {
+                padding: 96px 0;
+            }
+            .sec-soft {
+                background: linear-gradient(
+                    180deg,
+                    #fff,
+                    var(--bg-soft) 50%,
+                    #fff
+                );
+            }
+            .kicker {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                font-size: 0.8rem;
+                font-weight: 700;
+                color: var(--ocean-600);
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+                margin-bottom: 16px;
+            }
+            .kicker::before {
+                content: "";
+                width: 22px;
+                height: 2px;
+                background: var(--grad-ocean);
+                border-radius: 2px;
+            }
+            .sec-head {
+                max-width: 38rem;
+            }
+            .sec-head.center {
+                margin-inline: auto;
+                text-align: center;
+            }
+            .sec-head.center .kicker {
+                justify-content: center;
+            }
+            .sec-head h2 {
+                font-size: clamp(2rem, 3.6vw, 3rem);
+                font-weight: 800;
+                letter-spacing: -0.03em;
+            }
+            .sec-head h2 .grad {
+                background: var(--grad-ocean);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+            }
+            .sec-head p {
+                color: var(--ink-soft);
+                font-size: 1.08rem;
+                margin-top: 18px;
+            }
+
+            /* ===== bento ===== */
+            .bento {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                grid-auto-rows: minmax(190px, auto);
+                gap: 18px;
+                margin-top: 54px;
+            }
+            .card {
+                position: relative;
+                border-radius: var(--r-lg);
+                padding: 28px;
+                background: #fff;
+                border: 1px solid var(--line);
+                box-shadow: var(--shadow-sm);
+                overflow: hidden;
+                transition:
+                    transform 0.45s var(--ease),
+                    box-shadow 0.45s var(--ease),
+                    border-color 0.3s;
+            }
+            .card:hover {
+                transform: translateY(-6px);
+                box-shadow: var(--shadow-md);
+                border-color: var(--line-strong);
+            }
+            .card .ico {
+                width: 50px;
+                height: 50px;
+                border-radius: 14px;
+                display: grid;
+                place-items: center;
+                margin-bottom: 18px;
+                background: linear-gradient(
+                    135deg,
+                    rgba(17, 131, 214, 0.12),
+                    rgba(27, 196, 220, 0.12)
+                );
+                color: var(--ocean-600);
+                box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            }
+            .card .ico svg {
+                width: 24px;
+                height: 24px;
+            }
+            .card h3 {
+                font-size: 1.2rem;
+                font-weight: 700;
+                margin-bottom: 8px;
+            }
+            .card p {
+                color: var(--ink-soft);
+                font-size: 0.95rem;
+            }
+            .card.span2 {
+                grid-column: span 2;
+            }
+            .card.tall {
+                grid-row: span 2;
+            }
+            .card.feature {
+                background:
+                    radial-gradient(
+                        120% 120% at 100% 0%,
+                        rgba(27, 196, 220, 0.16),
+                        transparent 50%
+                    ),
+                    #fff;
+            }
+
+            /* big feature card with mini builder */
+            .card.builder {
+                grid-column: span 2;
+                grid-row: span 2;
+                background: linear-gradient(
+                    160deg,
+                    #06304f,
+                    #0a5c9c 65%,
+                    #0e84d6
+                );
+                color: #fff;
+                border: none;
+                display: flex;
+                flex-direction: column;
+            }
+            .card.builder .ico {
+                background: rgba(255, 255, 255, 0.16);
+                color: #fff;
+            }
+            .card.builder h3 {
+                color: #fff;
+                font-size: 1.5rem;
+            }
+            .card.builder p {
+                color: rgba(255, 255, 255, 0.78);
+            }
+            .builder-canvas {
+                margin-top: auto;
+                background: rgba(255, 255, 255, 0.08);
+                border: 1px solid rgba(255, 255, 255, 0.16);
+                border-radius: 18px;
+                padding: 16px;
+                display: grid;
+                grid-template-columns: 64px 1fr;
+                gap: 12px;
+                backdrop-filter: blur(6px);
+            }
+            .builder-canvas .blocks {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+            }
+            .builder-canvas .blocks i {
+                height: 30px;
+                border-radius: 8px;
+                background: rgba(255, 255, 255, 0.14);
+                display: block;
+                position: relative;
+            }
+            .builder-canvas .blocks i::after {
+                content: "";
+                position: absolute;
+                inset: 8px;
+                background: rgba(255, 255, 255, 0.4);
+                border-radius: 4px;
+            }
+            .builder-canvas .preview {
+                background: rgba(255, 255, 255, 0.95);
+                border-radius: 12px;
+                padding: 12px;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+            }
+            .builder-canvas .preview .h {
+                height: 14px;
+                width: 55%;
+                background: var(--grad-ocean);
+                border-radius: 5px;
+            }
+            .builder-canvas .preview .l {
+                height: 8px;
+                background: #d6e8f7;
+                border-radius: 4px;
+            }
+            .builder-canvas .preview .l.s {
+                width: 75%;
+            }
+            .builder-canvas .preview .pg {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 6px;
+                margin-top: 4px;
+            }
+            .builder-canvas .preview .pg span {
+                height: 34px;
+                border-radius: 7px;
+                background: linear-gradient(135deg, #e5f1fc, #cfe9fa);
+            }
+            .drag-tag {
+                align-self: flex-start;
+                margin-top: 14px;
+                background: rgba(255, 255, 255, 0.16);
+                border: 1px dashed rgba(255, 255, 255, 0.4);
+                border-radius: 999px;
+                font-size: 0.72rem;
+                padding: 0.3rem 0.7rem;
+                font-weight: 600;
+            }
+
+            .card.stat {
+                background: linear-gradient(160deg, #fff, #eaf4fd);
+                text-align: left;
+            }
+            .card.stat .big {
+                font-family: "Bricolage Grotesque";
+                font-size: 2.4rem;
+                font-weight: 800;
+                background: var(--grad-ocean);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+                line-height: 1;
+            }
+            .card.stat .lbl {
+                color: var(--ink-soft);
+                font-size: 0.9rem;
+                margin-top: 6px;
+            }
+
+            /* ===== marketplace strip ===== */
+            .mkt {
+                background: linear-gradient(
+                    160deg,
+                    #042438,
+                    #073f63 70%,
+                    #0a5c9c
+                );
+                color: #fff;
+                position: relative;
+                overflow: hidden;
+            }
+            .mkt::before {
+                content: "";
+                position: absolute;
+                width: 600px;
+                height: 600px;
+                border-radius: 50%;
+                background: radial-gradient(
+                    circle,
+                    rgba(27, 196, 220, 0.25),
+                    transparent 65%
+                );
+                top: -200px;
+                right: -100px;
+            }
+            .mkt::after {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M0 20h40M20 0v40' stroke='%23ffffff' stroke-opacity='0.04' stroke-width='1'/%3E%3C/svg%3E");
+            }
+            .mkt .wrap {
+                position: relative;
+                z-index: 1;
+            }
+            .mkt .kicker {
+                color: var(--cyan);
+            }
+            .mkt .sec-head h2 {
+                color: #fff;
+            }
+            .mkt .sec-head p {
+                color: rgba(255, 255, 255, 0.75);
+            }
+            .mkt-grid {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 16px;
+                margin-top: 54px;
+            }
+            .mk {
+                background: rgba(255, 255, 255, 0.06);
+                border: 1px solid rgba(255, 255, 255, 0.12);
+                border-radius: var(--r-md);
+                padding: 24px;
+                backdrop-filter: blur(8px);
+                transition:
+                    transform 0.4s var(--ease),
+                    background 0.3s;
+            }
+            .mk:hover {
+                transform: translateY(-6px);
+                background: rgba(255, 255, 255, 0.1);
+            }
+            .mk .ico {
+                width: 46px;
+                height: 46px;
+                border-radius: 13px;
+                background: var(--grad-ocean);
+                display: grid;
+                place-items: center;
+                margin-bottom: 16px;
+                box-shadow: var(--shadow-glow);
+            }
+            .mk .ico svg {
+                width: 22px;
+                height: 22px;
+                color: #fff;
+            }
+            .mk h4 {
+                font-size: 1.05rem;
+                font-weight: 700;
+                margin-bottom: 6px;
+            }
+            .mk p {
+                color: rgba(255, 255, 255, 0.66);
+                font-size: 0.88rem;
+            }
+
+            /* ===== templates ===== */
+            .tabs {
+                display: inline-flex;
+                gap: 0.3rem;
+                padding: 0.35rem;
+                background: var(--bg-soft-2);
+                border-radius: 999px;
+                margin: 34px auto 0;
+                border: 1px solid var(--line);
+            }
+            .tab {
+                padding: 0.6rem 1.2rem;
+                border-radius: 999px;
+                font-weight: 600;
+                font-size: 0.92rem;
+                cursor: pointer;
+                color: var(--ink-soft);
+                border: none;
+                background: transparent;
+                transition: all 0.3s var(--ease);
+            }
+            .tab.active {
+                background: #fff;
+                color: var(--ocean-700);
+                box-shadow: var(--shadow-sm);
+            }
+            .tpl-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 24px;
+                margin-top: 44px;
+            }
+            .tpl {
+                border-radius: var(--r-lg);
+                overflow: hidden;
+                background: #fff;
+                border: 1px solid var(--line);
+                box-shadow: var(--shadow-sm);
+                transition:
+                    transform 0.45s var(--ease),
+                    box-shadow 0.45s var(--ease);
+                cursor: pointer;
+            }
+            .tpl:hover {
+                transform: translateY(-8px);
+                box-shadow: var(--shadow-md);
+            }
+            .tpl .shot {
+                height: 210px;
+                position: relative;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                padding: 18px;
+                gap: 10px;
+            }
+            .tpl .shot .nav {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background: none;
+                backdrop-filter: none;
+                box-shadow: none;
+                border: none;
+                padding: 0;
+                margin: 0;
+            }
+            .tpl .shot .nav .lg {
+                font-family: "Bricolage Grotesque";
+                font-weight: 800;
+                font-size: 0.85rem;
+                color: #fff;
+            }
+            .tpl .shot .nav .dots {
+                display: flex;
+                gap: 5px;
+            }
+            .tpl .shot .nav .dots i {
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.6);
+                display: block;
+            }
+            .tpl .shot .hero-t {
+                margin-top: auto;
+                color: #fff;
+            }
+            .tpl .shot .hero-t .t {
+                font-family: "Bricolage Grotesque";
+                font-weight: 800;
+                font-size: 1.25rem;
+                line-height: 1.1;
+            }
+            .tpl .shot .hero-t .cards {
+                display: flex;
+                gap: 8px;
+                margin-top: 12px;
+            }
+            .tpl .shot .hero-t .cards span {
+                flex: 1;
+                height: 44px;
+                border-radius: 9px;
+                background: rgba(255, 255, 255, 0.85);
+            }
+            .tpl .meta {
+                padding: 18px 20px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+            .tpl .meta .nm {
+                font-weight: 700;
+                font-size: 1rem;
+            }
+            .tpl .meta .cat {
+                font-size: 0.78rem;
+                color: var(--ink-faint);
+            }
+            .tpl .meta .use {
+                font-size: 0.8rem;
+                font-weight: 700;
+                color: var(--ocean-600);
+                display: flex;
+                align-items: center;
+                gap: 0.3rem;
+            }
+
+            /* ===== steps ===== */
+            .steps {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 26px;
+                margin-top: 54px;
+                position: relative;
+            }
+            .step {
+                position: relative;
+                padding: 30px;
+                border-radius: var(--r-lg);
+                background: #fff;
+                border: 1px solid var(--line);
+                box-shadow: var(--shadow-sm);
+            }
+            .step .n {
+                font-family: "Bricolage Grotesque";
+                font-size: 2.6rem;
+                font-weight: 800;
+                color: transparent;
+                -webkit-text-stroke: 1.5px var(--ocean-400);
+                line-height: 1;
+                opacity: 0.55;
+            }
+            .step h3 {
+                font-size: 1.22rem;
+                margin: 14px 0 8px;
+            }
+            .step p {
+                color: var(--ink-soft);
+                font-size: 0.95rem;
+            }
+            .step .ar {
+                position: absolute;
+                top: 42px;
+                right: -22px;
+                color: var(--ocean-400);
+                z-index: 2;
+            }
+            .step:last-child .ar {
+                display: none;
+            }
+
+            /* ===== pricing ===== */
+            .toggle {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.8rem;
+                margin: 30px auto 0;
+                font-weight: 600;
+                font-size: 0.95rem;
+                color: var(--ink-soft);
+            }
+            .switch {
+                width: 56px;
+                height: 30px;
+                border-radius: 999px;
+                background: var(--bg-soft-2);
+                border: 1px solid var(--line);
+                position: relative;
+                cursor: pointer;
+                transition: 0.3s;
+            }
+            .switch.on {
+                background: var(--grad-ocean);
+            }
+            .switch .knob {
+                position: absolute;
+                top: 3px;
+                left: 3px;
+                width: 22px;
+                height: 22px;
+                border-radius: 50%;
+                background: #fff;
+                box-shadow: var(--shadow-sm);
+                transition: 0.35s var(--ease);
+            }
+            .switch.on .knob {
+                left: 31px;
+            }
+            .save {
+                background: rgba(47, 211, 192, 0.16);
+                color: #0e8f7e;
+                font-size: 0.74rem;
+                font-weight: 700;
+                padding: 0.22rem 0.55rem;
+                border-radius: 999px;
+            }
+            .price-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 24px;
+                margin-top: 50px;
+                align-items: stretch;
+            }
+            .plan {
+                border-radius: var(--r-lg);
+                background: #fff;
+                border: 1px solid var(--line);
+                padding: 34px 30px;
+                box-shadow: var(--shadow-sm);
+                display: flex;
+                flex-direction: column;
+                transition: transform 0.4s var(--ease);
+            }
+            .plan:hover {
+                transform: translateY(-6px);
+            }
+            .plan h3 {
+                font-size: 1.3rem;
+                margin-bottom: 6px;
+            }
+            .plan .desc {
+                color: var(--ink-faint);
+                font-size: 0.88rem;
+                min-height: 38px;
+            }
+            .plan .amt {
+                font-family: "Bricolage Grotesque";
+                font-size: 2.7rem;
+                font-weight: 800;
+                margin: 18px 0 2px;
+                line-height: 1;
+            }
+            .plan .amt small {
+                font-size: 0.95rem;
+                font-weight: 600;
+                color: var(--ink-faint);
+            }
+            .plan .per {
+                color: var(--ink-faint);
+                font-size: 0.85rem;
+                margin-bottom: 22px;
+            }
+            .plan ul {
+                list-style: none;
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+                margin-bottom: 26px;
+                flex: 1;
+            }
+            .plan li {
+                display: flex;
+                align-items: flex-start;
+                gap: 0.6rem;
+                font-size: 0.92rem;
+                color: var(--ink-soft);
+            }
+            .plan li svg {
+                width: 18px;
+                height: 18px;
+                color: var(--teal);
+                flex: none;
+                margin-top: 2px;
+            }
+            .plan .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            .plan.pop {
+                background: linear-gradient(
+                    165deg,
+                    #06304f,
+                    #0a5c9c 70%,
+                    #0e84d6
+                );
+                color: #fff;
+                border: none;
+                box-shadow: var(--shadow-lg);
+                position: relative;
+                transform: scale(1.04);
+            }
+            .plan.pop:hover {
+                transform: scale(1.04) translateY(-6px);
+            }
+            .plan.pop .desc,
+            .plan.pop .per {
+                color: rgba(255, 255, 255, 0.72);
+            }
+            .plan.pop li {
+                color: rgba(255, 255, 255, 0.85);
+            }
+            .plan.pop li svg {
+                color: var(--cyan);
+            }
+            .plan.pop .badge {
+                position: absolute;
+                top: -13px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: var(--grad-ocean-soft);
+                color: #fff;
+                font-size: 0.72rem;
+                font-weight: 700;
+                padding: 0.35rem 0.9rem;
+                border-radius: 999px;
+                box-shadow: var(--shadow-glow);
+                white-space: nowrap;
+            }
+
+            /* ===== quote ===== */
+            .quote {
+                text-align: center;
+                max-width: 50rem;
+                margin-inline: auto;
+            }
+            .quote .q {
+                font-family: "Bricolage Grotesque";
+                font-size: clamp(1.5rem, 3vw, 2.3rem);
+                font-weight: 600;
+                letter-spacing: -0.02em;
+                line-height: 1.25;
+            }
+            .quote .q span {
+                background: var(--grad-ocean);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+            }
+            .quote .who {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.8rem;
+                margin-top: 30px;
+            }
+            .quote .who .av {
+                width: 52px;
+                height: 52px;
+                border-radius: 50%;
+                background: var(--grad-ocean-soft);
+                box-shadow: var(--shadow-md);
+            }
+            .quote .who .nm {
+                text-align: left;
+            }
+            .quote .who .nm b {
+                display: block;
+                font-weight: 700;
+            }
+            .quote .who .nm small {
+                color: var(--ink-faint);
+            }
+
+            /* ===== final cta ===== */
+            .cta-band {
+                position: relative;
+                border-radius: var(--r-xl);
+                padding: 72px 56px;
+                overflow: hidden;
+                background: linear-gradient(
+                    135deg,
+                    #06304f,
+                    #0a5c9c 55%,
+                    #0e84d6
+                );
+                color: #fff;
+                text-align: center;
+                box-shadow: var(--shadow-lg);
+            }
+            .cta-band::before {
+                content: "";
+                position: absolute;
+                width: 500px;
+                height: 500px;
+                border-radius: 50%;
+                background: radial-gradient(
+                    circle,
+                    rgba(27, 196, 220, 0.4),
+                    transparent 60%
+                );
+                top: -180px;
+                left: -120px;
+            }
+            .cta-band::after {
+                content: "";
+                position: absolute;
+                width: 400px;
+                height: 400px;
+                border-radius: 50%;
+                background: radial-gradient(
+                    circle,
+                    rgba(47, 211, 192, 0.3),
+                    transparent 60%
+                );
+                bottom: -160px;
+                right: -100px;
+            }
+            .cta-band .inner {
+                position: relative;
+                z-index: 1;
+            }
+            .cta-band h2 {
+                font-size: clamp(2rem, 4vw, 3.2rem);
+                font-weight: 800;
+                letter-spacing: -0.03em;
+            }
+            .cta-band p {
+                color: rgba(255, 255, 255, 0.82);
+                font-size: 1.12rem;
+                margin: 18px auto 32px;
+                max-width: 34rem;
+            }
+            .cta-band .acts {
+                display: flex;
+                gap: 0.8rem;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            .cta-band .mini {
+                margin-top: 20px;
+                font-size: 0.85rem;
+                color: rgba(255, 255, 255, 0.7);
+            }
+
+            /* ===== footer ===== */
+            footer {
+                padding: 80px 0 36px;
+                background: var(--bg-soft);
+                border-top: 1px solid var(--line);
+            }
+            .foot-grid {
+                display: grid;
+                grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr;
+                gap: 40px;
+                margin-bottom: 50px;
+            }
+            .foot-brand .logo {
+                margin-bottom: 16px;
+            }
+            .foot-brand p {
+                color: var(--ink-soft);
+                font-size: 0.92rem;
+                max-width: 24em;
+                margin-bottom: 18px;
+            }
+            .socials {
+                display: flex;
+                gap: 0.5rem;
+            }
+            .socials a {
+                width: 38px;
+                height: 38px;
+                border-radius: 11px;
+                background: #fff;
+                border: 1px solid var(--line);
+                display: grid;
+                place-items: center;
+                color: var(--ink-soft);
+                transition: 0.3s;
+            }
+            .socials a:hover {
+                color: #fff;
+                background: var(--grad-ocean);
+                border-color: transparent;
+                transform: translateY(-2px);
+            }
+            .socials a svg {
+                width: 18px;
+                height: 18px;
+            }
+            .fcol h5 {
+                font-size: 0.78rem;
+                text-transform: uppercase;
+                letter-spacing: 0.08em;
+                color: var(--ink-faint);
+                margin-bottom: 16px;
+                font-family: "Plus Jakarta Sans";
+                font-weight: 700;
+            }
+            .fcol a {
+                display: block;
+                color: var(--ink-soft);
+                font-size: 0.92rem;
+                margin-bottom: 11px;
+                transition: 0.25s;
+            }
+            .fcol a:hover {
+                color: var(--ocean-700);
+                transform: translateX(3px);
+            }
+            .foot-bot {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding-top: 26px;
+                border-top: 1px solid var(--line);
+                font-size: 0.85rem;
+                color: var(--ink-faint);
+                flex-wrap: wrap;
+                gap: 14px;
+            }
+            .foot-bot .made {
+                display: flex;
+                align-items: center;
+                gap: 0.4rem;
+            }
+            .foot-bot .made .heart {
+                color: #ff6b6b;
+            }
+
+            /* reveal */
+            .reveal {
+                opacity: 0;
+                transform: translateY(28px);
+                transition:
+                    opacity 0.8s var(--ease),
+                    transform 0.8s var(--ease);
+            }
+            .reveal.in {
+                opacity: 1;
+                transform: none;
+            }
+
+            /* responsive */
+            @media (max-width: 1024px) {
+                .hero-grid {
+                    grid-template-columns: 1fr;
+                    gap: 60px;
+                }
+                .mock {
+                    max-width: 480px;
+                    margin-inline: auto;
+                }
+                .bento,
+                .mkt-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+                .card.builder {
+                    grid-column: span 2;
+                }
+                .chip.c1 {
+                    left: 0;
+                }
+                .chip.c2 {
+                    right: 0;
+                }
+                .chip.c3 {
+                    right: -4%;
+                }
+            }
+            @media (max-width: 768px) {
+                .nav-links,
+                .nav-cta .login {
+                    display: none;
+                }
+                .burger {
+                    display: grid;
+                }
+                .tpl-grid,
+                .steps,
+                .price-grid,
+                .bento,
+                .mkt-grid {
+                    grid-template-columns: 1fr;
+                }
+                .card.span2,
+                .card.builder,
+                .card.tall {
+                    grid-column: auto;
+                    grid-row: auto;
+                }
+                .plan.pop {
+                    transform: none;
+                }
+                .plan.pop:hover {
+                    transform: translateY(-6px);
+                }
+                .step .ar {
+                    display: none;
+                }
+                .foot-grid {
+                    grid-template-columns: 1fr 1fr;
+                    gap: 30px;
+                }
+                .foot-brand {
+                    grid-column: span 2;
+                }
+                .cta-band {
+                    padding: 54px 28px;
+                }
+                .hero {
+                    padding: 140px 0 70px;
+                }
+                .sec {
+                    padding: 70px 0;
+                }
+            }
+            @media (max-width: 480px) {
+                .foot-grid {
+                    grid-template-columns: 1fr;
+                }
+                .foot-brand {
+                    grid-column: auto;
+                }
+                .chip {
+                    display: none;
+                }
+            }
+            @media (prefers-reduced-motion: reduce) {
+                * {
+                    animation: none !important;
+                    transition: none !important;
+                }
+                .reveal {
+                    opacity: 1;
+                    transform: none;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="grain"></div>
+
+        <!-- NAV -->
+        <header id="header">
+            <div class="wrap">
+                <nav class="nav">
+                    <a class="logo" href="#">
+                        <span class="mark">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M3 9l2-4h14l2 4M3 9v9a1 1 0 001 1h16a1 1 0 001-1V9M3 9h18M9 13h6"
+                                    stroke="#fff"
+                                    stroke-width="1.8"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+                        </span>
+                        <b>Lapakku</b>
+                    </a>
+                    <div class="nav-links">
+                        <a href="#fitur">Fitur</a>
+                        <a href="#marketplace">Marketplace</a>
+                        <a href="#template">Template</a>
+                        <a href="#harga">Harga</a>
+                        <a href="#cerita">Cerita</a>
+                    </div>
+                    <div class="nav-cta">
+                        <a class="login" href="#">Masuk</a>
+                        <a class="btn btn-primary" href="#harga"
+                            >Mulai Gratis
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M5 12h14M13 6l6 6-6 6"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+                        </a>
+                        <div class="burger" id="burger"><span></span></div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <!-- HERO -->
+        <section class="hero">
+            <div class="hero-bg"></div>
+            <div class="blob b1"></div>
+            <div class="blob b2"></div>
+            <div class="wrap">
+                <div class="hero-grid">
+                    <div class="hero-copy reveal">
+                        <span class="eyebrow"
+                            ><span class="tag">Baru</span> Integrasi WhatsApp
+                            Commerce &amp; QRIS</span
+                        >
+                        <h1>
+                            Bangun toko online-mu,
+                            <span class="grad">tanpa ribet.</span>
+                        </h1>
+                        <p class="lead">
+                            Platform all-in-one untuk bikin toko online yang
+                            cantik dalam hitungan menit. Fitur selengkap
+                            marketplace — checkout, ongkir, voucher, chat — tapi
+                            tokomu, brandmu, datamu sendiri.
+                        </p>
+                        <div class="hero-actions">
+                            <a class="btn btn-primary btn-lg" href="#harga"
+                                >Buka Toko Gratis
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M5 12h14M13 6l6 6-6 6"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                </svg>
+                            </a>
+                            <a class="btn btn-ghost btn-lg" href="#template">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M8 5v14l11-7z"
+                                        fill="currentColor"
+                                    />
+                                </svg>
+                                Lihat Demo
+                            </a>
+                        </div>
+                        <div class="hero-note">
+                            <div class="avatars">
+                                <span></span><span></span><span></span
+                                ><span></span>
+                            </div>
+                            <small
+                                ><b>120.000+</b> penjual sudah jualan<br /><span
+                                    class="stars"
+                                    >★★★★★</span
+                                >
+                                rata-rata 4.9/5 kepuasan</small
+                            >
+                        </div>
+                    </div>
+
+                    <div class="mock reveal">
+                        <div class="browser">
+                            <div class="bar">
+                                <i></i><i></i><i></i
+                                ><span class="url">tokorani.Lapakku.id</span>
+                            </div>
+                            <div class="store-head">
+                                <div class="brand">
+                                    <span class="b">R</span>Toko Rani
+                                </div>
+                                <div class="icons">
+                                    <span
+                                        ><svg
+                                            width="15"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                        >
+                                            <circle
+                                                cx="11"
+                                                cy="11"
+                                                r="7"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                            />
+                                            <path
+                                                d="M21 21l-4-4"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                            /></svg
+                                    ></span>
+                                    <span
+                                        ><svg
+                                            width="15"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                        >
+                                            <path
+                                                d="M20 8.5c0-2.5-2-4.5-4.5-4.5-1.7 0-3 .9-3.5 2-.5-1.1-1.8-2-3.5-2C6 4 4 6 4 8.5c0 4 8 9.5 8 9.5s8-5.5 8-9.5z"
+                                                stroke="currentColor"
+                                                stroke-width="1.8"
+                                            /></svg
+                                    ></span>
+                                    <span
+                                        ><svg
+                                            width="15"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                        >
+                                            <path
+                                                d="M6 6h15l-1.5 9h-12L6 6zM6 6L5 3H2M8 20a1 1 0 100-2 1 1 0 000 2zM18 20a1 1 0 100-2 1 1 0 000 2z"
+                                                stroke="currentColor"
+                                                stroke-width="1.8"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                            /></svg
+                                    ></span>
+                                </div>
+                            </div>
+                            <div class="hero-banner">
+                                <small>Flash Sale · Berakhir 02:14:55</small>
+                                <h5>Diskon s/d 70%</h5>
+                                <span class="pill">Belanja sekarang</span>
+                            </div>
+                            <div class="prod-grid">
+                                <div class="prod">
+                                    <div class="thumb"></div>
+                                    <div class="meta">
+                                        <div class="nm">Tas Kulit Premium</div>
+                                        <div class="pr">Rp 249.000</div>
+                                        <div class="rt">★ 4.9 · 1,2rb</div>
+                                    </div>
+                                </div>
+                                <div class="prod">
+                                    <div class="thumb"></div>
+                                    <div class="meta">
+                                        <div class="nm">Sepatu Sneakers</div>
+                                        <div class="pr">Rp 389.000</div>
+                                        <div class="rt">★ 4.8 · 980</div>
+                                    </div>
+                                </div>
+                                <div class="prod">
+                                    <div class="thumb"></div>
+                                    <div class="meta">
+                                        <div class="nm">Jam Tangan</div>
+                                        <div class="pr">Rp 520.000</div>
+                                        <div class="rt">★ 5.0 · 640</div>
+                                    </div>
+                                </div>
+                                <div class="prod">
+                                    <div class="thumb"></div>
+                                    <div class="meta">
+                                        <div class="nm">Kacamata</div>
+                                        <div class="pr">Rp 175.000</div>
+                                        <div class="rt">★ 4.7 · 410</div>
+                                    </div>
+                                </div>
+                                <div class="prod">
+                                    <div class="thumb"></div>
+                                    <div class="meta">
+                                        <div class="nm">Dompet Kulit</div>
+                                        <div class="pr">Rp 129.000</div>
+                                        <div class="rt">★ 4.9 · 2,1rb</div>
+                                    </div>
+                                </div>
+                                <div class="prod">
+                                    <div class="thumb"></div>
+                                    <div class="meta">
+                                        <div class="nm">Topi Bucket</div>
+                                        <div class="pr">Rp 89.000</div>
+                                        <div class="rt">★ 4.8 · 750</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="chip c1">
+                            <div class="ic">
+                                <svg width="18" viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"
+                                        stroke="#fff"
+                                        stroke-width="2.2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                </svg>
+                            </div>
+                            <div>
+                                <small>Pesanan baru</small><b>+Rp 249.000</b>
+                            </div>
+                        </div>
+
+                        <div class="chip c2">
+                            <div class="row">
+                                <small>Penjualan hari ini</small
+                                ><span class="up">▲ 24%</span>
+                            </div>
+                            <b>Rp 8.420.000</b>
+                            <div class="spark">
+                                <i style="height: 40%"></i
+                                ><i style="height: 65%"></i
+                                ><i style="height: 45%"></i
+                                ><i style="height: 80%"></i
+                                ><i style="height: 60%"></i
+                                ><i style="height: 95%"></i
+                                ><i style="height: 75%"></i>
+                            </div>
+                        </div>
+
+                        <div class="chip c3">
+                            <span class="star">★</span>
+                            <div><b>4.9</b><small>320 ulasan</small></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TRUST -->
+        <section class="trust">
+            <div class="wrap reveal">
+                <p>
+                    Terintegrasi dengan layanan pembayaran &amp; logistik
+                    favorit
+                </p>
+                <div class="marquee">
+                    <div class="marquee-track">
+                        <span class="mlogo"
+                            ><span class="d"></span>BayarCepat</span
+                        >
+                        <span class="mlogo"
+                            ><span class="d"></span>DompetKu</span
+                        >
+                        <span class="mlogo"
+                            ><span class="d"></span>KirimAja</span
+                        >
+                        <span class="mlogo"><span class="d"></span>QRIS</span>
+                        <span class="mlogo"
+                            ><span class="d"></span>LajuKurir</span
+                        >
+                        <span class="mlogo"
+                            ><span class="d"></span>InstaPay</span
+                        >
+                        <span class="mlogo"
+                            ><span class="d"></span>SiCepat Box</span
+                        >
+                        <span class="mlogo"
+                            ><span class="d"></span>BayarCepat</span
+                        >
+                        <span class="mlogo"
+                            ><span class="d"></span>DompetKu</span
+                        >
+                        <span class="mlogo"
+                            ><span class="d"></span>KirimAja</span
+                        >
+                        <span class="mlogo"><span class="d"></span>QRIS</span>
+                        <span class="mlogo"
+                            ><span class="d"></span>LajuKurir</span
+                        >
+                        <span class="mlogo"
+                            ><span class="d"></span>InstaPay</span
+                        >
+                        <span class="mlogo"
+                            ><span class="d"></span>SiCepat Box</span
+                        >
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURES BENTO -->
+        <section class="sec" id="fitur">
+            <div class="wrap">
+                <div class="sec-head reveal">
+                    <span class="kicker">Semua yang kamu butuh</span>
+                    <h2>
+                        Satu platform, <span class="grad">toko lengkap.</span>
+                    </h2>
+                    <p>
+                        Tidak perlu coding, tidak perlu pasang plugin satu per
+                        satu. Semua tools untuk jualan online sudah jadi dan
+                        tinggal pakai.
+                    </p>
+                </div>
+
+                <div class="bento">
+                    <div class="card builder reveal">
+                        <div class="ico">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M12 2l2.4 7.4H22l-6 4.5 2.3 7.1-6.3-4.6L5.7 21 8 13.9 2 9.4h7.6z"
+                                    stroke="#fff"
+                                    stroke-width="1.6"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+                        </div>
+                        <h3>Page Builder Drag &amp; Drop</h3>
+                        <p>
+                            Susun halaman tokomu seperti menyusun balok. Geser
+                            komponen, atur warna, langsung live. Tanpa satu
+                            baris kode pun.
+                        </p>
+                        <span class="drag-tag">⠿ Tarik &amp; lepas blok</span>
+                        <div class="builder-canvas">
+                            <div class="blocks"><i></i><i></i><i></i></div>
+                            <div class="preview">
+                                <div class="h"></div>
+                                <div class="l"></div>
+                                <div class="l s"></div>
+                                <div class="pg">
+                                    <span></span><span></span><span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card feature reveal">
+                        <div class="ico">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <rect
+                                    x="2"
+                                    y="5"
+                                    width="20"
+                                    height="14"
+                                    rx="2"
+                                    stroke="currentColor"
+                                    stroke-width="1.8"
+                                />
+                                <path
+                                    d="M2 10h20M6 15h4"
+                                    stroke="currentColor"
+                                    stroke-width="1.8"
+                                    stroke-linecap="round"
+                                />
+                            </svg>
+                        </div>
+                        <h3>Pembayaran Instan</h3>
+                        <p>
+                            QRIS, e-wallet, transfer bank, hingga cicilan. Dana
+                            langsung masuk, otomatis terekonsiliasi.
+                        </p>
+                    </div>
+
+                    <div class="card feature reveal">
+                        <div class="ico">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M1 3h13v13H1zM14 8h4l3 3v5h-7M5.5 19a2 2 0 100-4 2 2 0 000 4zM18.5 19a2 2 0 100-4 2 2 0 000 4z"
+                                    stroke="currentColor"
+                                    stroke-width="1.7"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+                        </div>
+                        <h3>Ongkir &amp; Multi-Kurir</h3>
+                        <p>
+                            Cek ongkir real-time dari belasan kurir, cetak resi
+                            & lacak paket langsung dari dashboard.
+                        </p>
+                    </div>
+
+                    <div class="card span2 reveal">
+                        <div class="ico">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M3 3v18h18M7 14l3-4 3 3 5-7"
+                                    stroke="currentColor"
+                                    stroke-width="1.9"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+                        </div>
+                        <h3>Analitik Real-time</h3>
+                        <p>
+                            Pantau penjualan, produk terlaris, sumber traffic,
+                            dan perilaku pembeli dalam satu dashboard yang mudah
+                            dibaca — bukan angka yang bikin pusing.
+                        </p>
+                    </div>
+
+                    <div class="card stat reveal">
+                        <div
+                            class="big"
+                            data-count="99.9"
+                            data-suffix="%"
+                            data-decimals="1"
+                        >
+                            0%
+                        </div>
+                        <div class="lbl">
+                            Uptime server, toko selalu siap melayani 24/7
+                        </div>
+                    </div>
+
+                    <div class="card feature reveal">
+                        <div class="ico">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M21 11.5a8.4 8.4 0 01-9 8.5 8.6 8.6 0 01-4-1L3 21l1.5-5a8.5 8.5 0 1116.5-3.5z"
+                                    stroke="currentColor"
+                                    stroke-width="1.8"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+                        </div>
+                        <h3>Chat Penjual</h3>
+                        <p>
+                            Live chat menyatu dengan WhatsApp. Balas pembeli
+                            cepat, closing makin gampang.
+                        </p>
+                    </div>
+
+                    <div class="card feature reveal">
+                        <div class="ico">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M20 7l-8-4-8 4 8 4 8-4zM4 7v10l8 4 8-4V7M12 11v10"
+                                    stroke="currentColor"
+                                    stroke-width="1.7"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+                        </div>
+                        <h3>Kelola Stok &amp; Varian</h3>
+                        <p>
+                            Atur stok, varian warna/ukuran, dan harga grosir.
+                            Notifikasi otomatis saat stok menipis.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MARKETPLACE STRIP -->
+        <section class="sec mkt" id="marketplace">
+            <div class="wrap">
+                <div class="sec-head center reveal">
+                    <span class="kicker">Pengalaman ala marketplace</span>
+                    <h2>
+                        Rasa Shopee &amp; Tokopedia, <br />tapi tokomu sendiri.
+                    </h2>
+                    <p>
+                        Pembeli sudah terbiasa dengan fitur marketplace. Kami
+                        hadirkan semuanya di tokomu, jadi mereka langsung nyaman
+                        dan tidak ragu checkout.
+                    </p>
+                </div>
+                <div class="mkt-grid">
+                    <div class="mk reveal">
+                        <div class="ico">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M6 6h15l-1.5 9h-12L6 6zM6 6L5 3H2M8 20a1 1 0 100-2 1 1 0 000 2zM18 20a1 1 0 100-2 1 1 0 000 2z"
+                                    stroke="#fff"
+                                    stroke-width="1.8"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+                        </div>
+                        <h4>Keranjang &amp; Checkout</h4>
+                        <p>
+                            Alur belanja singkat dan familiar yang menekan cart
+                            abandonment.
+                        </p>
+                    </div>
+                    <div class="mk reveal">
+                        <div class="ico">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"
+                                    stroke="#fff"
+                                    stroke-width="1.8"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+                        </div>
+                        <h4>Flash Sale &amp; Countdown</h4>
+                        <p>
+                            Bikin promo kilat dengan timer untuk memicu
+                            pembelian impulsif.
+                        </p>
+                    </div>
+                    <div class="mk reveal">
+                        <div class="ico">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M20.6 13.4L13.4 20.6a2 2 0 01-2.8 0l-7-7A2 2 0 013 12V5a2 2 0 012-2h7a2 2 0 011.4.6l7.2 7.2a2 2 0 010 2.6z"
+                                    stroke="#fff"
+                                    stroke-width="1.8"
+                                />
+                                <circle cx="8" cy="8" r="1.5" fill="#fff" />
+                            </svg>
+                        </div>
+                        <h4>Voucher &amp; Promo</h4>
+                        <p>
+                            Kupon diskon, gratis ongkir, cashback, hingga
+                            bundling produk.
+                        </p>
+                    </div>
+                    <div class="mk reveal">
+                        <div class="ico">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M12 2l3 6.5 7 .6-5.3 4.6L18.2 21 12 17.3 5.8 21l1.5-7.3L2 9.1l7-.6z"
+                                    stroke="#fff"
+                                    stroke-width="1.7"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+                        </div>
+                        <h4>Rating &amp; Ulasan</h4>
+                        <p>
+                            Review berfoto dari pembeli yang membangun
+                            kepercayaan calon pembeli.
+                        </p>
+                    </div>
+                    <div class="mk reveal">
+                        <div class="ico">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <circle
+                                    cx="12"
+                                    cy="8"
+                                    r="4"
+                                    stroke="#fff"
+                                    stroke-width="1.8"
+                                />
+                                <path
+                                    d="M4 21c0-4 3.6-6 8-6s8 2 8 6"
+                                    stroke="#fff"
+                                    stroke-width="1.8"
+                                    stroke-linecap="round"
+                                />
+                            </svg>
+                        </div>
+                        <h4>Program Loyalitas</h4>
+                        <p>
+                            Poin reward & membership untuk bikin pembeli balik
+                            lagi dan lagi.
+                        </p>
+                    </div>
+                    <div class="mk reveal">
+                        <div class="ico">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <rect
+                                    x="5"
+                                    y="2"
+                                    width="14"
+                                    height="20"
+                                    rx="2"
+                                    stroke="#fff"
+                                    stroke-width="1.8"
+                                />
+                                <path
+                                    d="M10 19h4"
+                                    stroke="#fff"
+                                    stroke-width="1.8"
+                                    stroke-linecap="round"
+                                />
+                            </svg>
+                        </div>
+                        <h4>Toko Mobile-First</h4>
+                        <p>
+                            Tampilan ngebut & mulus di HP, tempat 80% pembeli
+                            berbelanja.
+                        </p>
+                    </div>
+                    <div class="mk reveal">
+                        <div class="ico">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
+                                    stroke="#fff"
+                                    stroke-width="1.8"
+                                    stroke-linejoin="round"
+                                />
+                                <path
+                                    d="M9 12l2 2 4-4"
+                                    stroke="#fff"
+                                    stroke-width="1.8"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+                        </div>
+                        <h4>Proteksi Pembeli</h4>
+                        <p>
+                            Sistem dispute & escrow yang bikin transaksi terasa
+                            aman.
+                        </p>
+                    </div>
+                    <div class="mk reveal">
+                        <div class="ico">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M4 4h16v12H5.2L4 18V4z"
+                                    stroke="#fff"
+                                    stroke-width="1.8"
+                                    stroke-linejoin="round"
+                                />
+                                <path
+                                    d="M8 9h8M8 12h5"
+                                    stroke="#fff"
+                                    stroke-width="1.8"
+                                    stroke-linecap="round"
+                                />
+                            </svg>
+                        </div>
+                        <h4>Multi-Channel</h4>
+                        <p>
+                            Jual sekaligus ke Instagram, TikTok Shop &
+                            marketplace lain.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TEMPLATES -->
+        <section class="sec sec-soft" id="template">
+            <div class="wrap">
+                <div class="sec-head center reveal">
+                    <span class="kicker">Template siap pakai</span>
+                    <h2>
+                        Desain modern, <span class="grad">bukan jadul.</span>
+                    </h2>
+                    <p>
+                        Puluhan template profesional yang bisa kamu sulap jadi
+                        milikmu dalam beberapa klik. Pilih sesuai jenis
+                        bisnismu.
+                    </p>
+                    <div class="tabs" id="tplTabs">
+                        <button class="tab active" data-cat="fashion">
+                            Fashion
+                        </button>
+                        <button class="tab" data-cat="fnb">F&amp;B</button>
+                        <button class="tab" data-cat="elektronik">
+                            Elektronik
+                        </button>
+                        <button class="tab" data-cat="jasa">Jasa</button>
+                    </div>
+                </div>
+                <div class="tpl-grid reveal" id="tplGrid"></div>
+            </div>
+        </section>
+
+        <!-- STEPS -->
+        <section class="sec">
+            <div class="wrap">
+                <div class="sec-head center reveal">
+                    <span class="kicker">Mulai dalam menit</span>
+                    <h2>
+                        Dari nol ke jualan,
+                        <span class="grad">secepat itu.</span>
+                    </h2>
+                </div>
+                <div class="steps">
+                    <div class="step reveal">
+                        <div class="n">01</div>
+                        <h3>Daftar &amp; pilih nama toko</h3>
+                        <p>
+                            Buat akun gratis, klaim alamat tokomu
+                            (namamu.Lapakku.id) atau pakai domain sendiri.
+                        </p>
+                        <div class="ar">
+                            <svg width="44" viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M5 12h14M13 6l6 6-6 6"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="step reveal">
+                        <div class="n">02</div>
+                        <h3>Atur tampilan &amp; produk</h3>
+                        <p>
+                            Pilih template, upload produk, atur harga & stok.
+                            Semua dengan editor drag-and-drop.
+                        </p>
+                        <div class="ar">
+                            <svg width="44" viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M5 12h14M13 6l6 6-6 6"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="step reveal">
+                        <div class="n">03</div>
+                        <h3>Publikasikan &amp; jualan</h3>
+                        <p>
+                            Aktifkan pembayaran & kurir, sebarkan link tokomu,
+                            dan mulai terima pesanan pertama.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRICING -->
+        <section class="sec sec-soft" id="harga">
+            <div class="wrap">
+                <div class="sec-head center reveal">
+                    <span class="kicker">Harga transparan</span>
+                    <h2>
+                        Mulai gratis,
+                        <span class="grad">naik kelas kapan saja.</span>
+                    </h2>
+                    <p>
+                        Tanpa biaya tersembunyi. Tanpa kontrak. Batalkan kapan
+                        pun kamu mau.
+                    </p>
+                    <div class="toggle">
+                        <span>Bulanan</span>
+                        <div class="switch" id="billSwitch">
+                            <div class="knob"></div>
+                        </div>
+                        <span>Tahunan <span class="save">Hemat 20%</span></span>
+                    </div>
+                </div>
+                <div class="price-grid">
+                    <div class="plan reveal">
+                        <h3>Pemula</h3>
+                        <p class="desc">Untuk yang baru mulai jualan online.</p>
+                        <div class="amt">Gratis</div>
+                        <div class="per">selamanya, tanpa kartu kredit</div>
+                        <ul>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M5 12l4 4L19 6"
+                                        stroke="currentColor"
+                                        stroke-width="2.4"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    /></svg
+                                >Toko online + subdomain
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M5 12l4 4L19 6"
+                                        stroke="currentColor"
+                                        stroke-width="2.4"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    /></svg
+                                >Hingga 25 produk
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M5 12l4 4L19 6"
+                                        stroke="currentColor"
+                                        stroke-width="2.4"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    /></svg
+                                >Pembayaran QRIS &amp; e-wallet
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M5 12l4 4L19 6"
+                                        stroke="currentColor"
+                                        stroke-width="2.4"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    /></svg
+                                >Cek ongkir dasar
+                            </li>
+                        </ul>
+                        <a class="btn btn-ghost" href="#">Mulai Gratis</a>
+                    </div>
+
+                    <div class="plan pop reveal">
+                        <span class="badge">★ Paling Populer</span>
+                        <h3>Bisnis</h3>
+                        <p class="desc">Untuk toko yang serius bertumbuh.</p>
+                        <div class="amt">
+                            <small>Rp</small
+                            ><span
+                                class="price"
+                                data-month="149"
+                                data-year="119"
+                                >149</span
+                            ><small>rb</small>
+                        </div>
+                        <div class="per">
+                            /bulan · ditagih <span class="cycle">bulanan</span>
+                        </div>
+                        <ul>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M5 12l4 4L19 6"
+                                        stroke="currentColor"
+                                        stroke-width="2.4"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    /></svg
+                                >Semua fitur Pemula
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M5 12l4 4L19 6"
+                                        stroke="currentColor"
+                                        stroke-width="2.4"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    /></svg
+                                >Produk &amp; varian tak terbatas
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M5 12l4 4L19 6"
+                                        stroke="currentColor"
+                                        stroke-width="2.4"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    /></svg
+                                >Domain sendiri + tanpa branding
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M5 12l4 4L19 6"
+                                        stroke="currentColor"
+                                        stroke-width="2.4"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    /></svg
+                                >Flash sale, voucher &amp; loyalitas
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M5 12l4 4L19 6"
+                                        stroke="currentColor"
+                                        stroke-width="2.4"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    /></svg
+                                >Analitik lengkap + multi-channel
+                            </li>
+                        </ul>
+                        <a class="btn btn-white" href="#"
+                            >Coba 14 Hari Gratis</a
+                        >
+                    </div>
+
+                    <div class="plan reveal">
+                        <h3>Enterprise</h3>
+                        <p class="desc">Untuk brand & bisnis berskala besar.</p>
+                        <div class="amt">
+                            <small>Rp</small
+                            ><span
+                                class="price"
+                                data-month="499"
+                                data-year="399"
+                                >499</span
+                            ><small>rb</small>
+                        </div>
+                        <div class="per">
+                            /bulan · ditagih <span class="cycle">bulanan</span>
+                        </div>
+                        <ul>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M5 12l4 4L19 6"
+                                        stroke="currentColor"
+                                        stroke-width="2.4"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    /></svg
+                                >Semua fitur Bisnis
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M5 12l4 4L19 6"
+                                        stroke="currentColor"
+                                        stroke-width="2.4"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    /></svg
+                                >Multi-staff &amp; hak akses
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M5 12l4 4L19 6"
+                                        stroke="currentColor"
+                                        stroke-width="2.4"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    /></svg
+                                >API &amp; integrasi kustom
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M5 12l4 4L19 6"
+                                        stroke="currentColor"
+                                        stroke-width="2.4"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    /></svg
+                                >Account manager khusus
+                            </li>
+                        </ul>
+                        <a class="btn btn-ghost" href="#">Hubungi Sales</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- QUOTE -->
+        <section class="sec" id="cerita">
+            <div class="wrap">
+                <div class="quote reveal">
+                    <span
+                        class="kicker"
+                        style="justify-content: center; display: flex"
+                        >Cerita penjual</span
+                    >
+                    <p class="q">
+                        "Pindah dari marketplace ke toko sendiri di Lapakku,
+                        omzet kami naik <span>3x lipat</span> dalam 4 bulan.
+                        Akhirnya brand kami punya rumah sendiri yang terlihat
+                        profesional."
+                    </p>
+                    <div class="who">
+                        <div class="av"></div>
+                        <div class="nm">
+                            <b>Rani Pradana</b
+                            ><small>Founder, Rani Leather Goods</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FINAL CTA -->
+        <section class="sec" style="padding-top: 20px">
+            <div class="wrap reveal">
+                <div class="cta-band">
+                    <div class="inner">
+                        <h2>Siap punya toko sendiri?</h2>
+                        <p>
+                            Bergabung dengan ratusan ribu penjual yang sudah
+                            membangun bisnisnya di Lapakku. Gratis untuk
+                            memulai, tanpa risiko.
+                        </p>
+                        <div class="acts">
+                            <a class="btn btn-white btn-lg" href="#"
+                                >Buka Toko Sekarang
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M5 12h14M13 6l6 6-6 6"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                </svg>
+                            </a>
+                            <a
+                                class="btn btn-ghost btn-lg"
+                                href="#"
+                                style="
+                                    color: #fff;
+                                    background: rgba(255, 255, 255, 0.12);
+                                    border-color: rgba(255, 255, 255, 0.3);
+                                "
+                                >Jadwalkan Demo</a
+                            >
+                        </div>
+                        <p class="mini">
+                            Gratis selamanya · Tanpa kartu kredit · Setup dalam
+                            5 menit
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer>
+            <div class="wrap">
+                <div class="foot-grid">
+                    <div class="foot-brand">
+                        <a class="logo" href="#">
+                            <span class="mark"
+                                ><svg viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M3 9l2-4h14l2 4M3 9v9a1 1 0 001 1h16a1 1 0 001-1V9M3 9h18M9 13h6"
+                                        stroke="#fff"
+                                        stroke-width="1.8"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    /></svg
+                            ></span>
+                            <b>Lapakku</b>
+                        </a>
+                        <p>
+                            Platform pembuat toko online modern untuk UMKM dan
+                            brand Indonesia. Jualan jadi mudah, profesional, dan
+                            punya brand sendiri.
+                        </p>
+                        <div class="socials">
+                            <a href="#" aria-label="Instagram"
+                                ><svg viewBox="0 0 24 24" fill="none">
+                                    <rect
+                                        x="3"
+                                        y="3"
+                                        width="18"
+                                        height="18"
+                                        rx="5"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                    />
+                                    <circle
+                                        cx="12"
+                                        cy="12"
+                                        r="4"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                    />
+                                    <circle
+                                        cx="17.5"
+                                        cy="6.5"
+                                        r="1"
+                                        fill="currentColor"
+                                    /></svg
+                            ></a>
+                            <a href="#" aria-label="Twitter"
+                                ><svg viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M22 5.8c-.7.3-1.5.6-2.3.7a4 4 0 001.8-2.2c-.8.5-1.7.8-2.6 1a4 4 0 00-6.8 3.6A11.3 11.3 0 013 4.8a4 4 0 001.2 5.3c-.6 0-1.2-.2-1.8-.5a4 4 0 003.2 4 4 4 0 01-1.8.1 4 4 0 003.7 2.8A8 8 0 012 18.3a11.3 11.3 0 006.1 1.8c7.3 0 11.4-6.1 11.4-11.4v-.5c.8-.6 1.5-1.3 2-2.1z"
+                                        stroke="currentColor"
+                                        stroke-width="1.5"
+                                        stroke-linejoin="round"
+                                    /></svg
+                            ></a>
+                            <a href="#" aria-label="TikTok"
+                                ><svg viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M16 3c.3 2.3 1.8 4 4 4.3V11c-1.5 0-3-.5-4-1.3V16a5.5 5.5 0 11-5.5-5.5c.3 0 .6 0 .9.1V14a2.5 2.5 0 101.8 2.4V3z"
+                                        stroke="currentColor"
+                                        stroke-width="1.6"
+                                        stroke-linejoin="round"
+                                    /></svg
+                            ></a>
+                            <a href="#" aria-label="YouTube"
+                                ><svg viewBox="0 0 24 24" fill="none">
+                                    <rect
+                                        x="2"
+                                        y="5"
+                                        width="20"
+                                        height="14"
+                                        rx="4"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                    />
+                                    <path
+                                        d="M10 9l5 3-5 3V9z"
+                                        fill="currentColor"
+                                    /></svg
+                            ></a>
+                        </div>
+                    </div>
+                    <div class="fcol">
+                        <h5>Produk</h5>
+                        <a href="#">Page Builder</a><a href="#">Pembayaran</a
+                        ><a href="#">Pengiriman</a><a href="#">Analitik</a
+                        ><a href="#">Template</a>
+                    </div>
+                    <div class="fcol">
+                        <h5>Solusi</h5>
+                        <a href="#">Fashion</a><a href="#">Kuliner</a
+                        ><a href="#">Elektronik</a
+                        ><a href="#">Jasa &amp; Digital</a
+                        ><a href="#">Enterprise</a>
+                    </div>
+                    <div class="fcol">
+                        <h5>Sumber Daya</h5>
+                        <a href="#">Pusat Bantuan</a><a href="#">Blog Penjual</a
+                        ><a href="#">Akademi Lapakku</a><a href="#">Status</a
+                        ><a href="#">API Docs</a>
+                    </div>
+                    <div class="fcol">
+                        <h5>Perusahaan</h5>
+                        <a href="#">Tentang Kami</a><a href="#">Karier</a
+                        ><a href="#">Mitra</a><a href="#">Kontak</a
+                        ><a href="#">Privasi</a>
+                    </div>
+                </div>
+                <div class="foot-bot">
+                    <span>© 2026 Lapakku. Seluruh hak cipta dilindungi.</span>
+                    <span class="made"
+                        >Dibuat dengan <span class="heart">♥</span> di Jakarta,
+                        Indonesia 🇮🇩</span
+                    >
+                </div>
+            </div>
+        </footer>
+
+        <script>
+            // header scroll state
+            const header = document.getElementById("header");
+            const onScroll = () =>
+                header.classList.toggle("scrolled", window.scrollY > 20);
+            window.addEventListener("scroll", onScroll, { passive: true });
+            onScroll();
+
+            // reveal on scroll
+            const io = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((e, i) => {
+                        if (e.isIntersecting) {
+                            setTimeout(
+                                () => e.target.classList.add("in"),
+                                (i % 4) * 70,
+                            );
+                            io.unobserve(e.target);
+                        }
+                    });
+                },
+                { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
+            );
+            document
+                .querySelectorAll(".reveal")
+                .forEach((el) => io.observe(el));
+
+            // animated counters
+            const counters = document.querySelectorAll("[data-count]");
+            const cio = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((e) => {
+                        if (!e.isIntersecting) return;
+                        const el = e.target;
+                        const target = parseFloat(el.dataset.count);
+                        const dec = parseInt(el.dataset.decimals || "0");
+                        const suf = el.dataset.suffix || "";
+                        let cur = 0;
+                        const dur = 1600;
+                        const t0 = performance.now();
+                        const tick = (t) => {
+                            const p = Math.min((t - t0) / dur, 1);
+                            const ease = 1 - Math.pow(1 - p, 3);
+                            cur = target * ease;
+                            el.textContent = cur.toFixed(dec) + suf;
+                            if (p < 1) requestAnimationFrame(tick);
+                        };
+                        requestAnimationFrame(tick);
+                        cio.unobserve(el);
+                    });
+                },
+                { threshold: 0.5 },
+            );
+            counters.forEach((c) => cio.observe(c));
+
+            // templates data + render
+            const TPL = {
+                fashion: [
+                    {
+                        nm: "Nara Studio",
+                        cat: "Pakaian wanita",
+                        g: "linear-gradient(135deg,#0B6FBE,#1BC4DC)",
+                    },
+                    {
+                        nm: "Urban Thread",
+                        cat: "Streetwear",
+                        g: "linear-gradient(135deg,#062E4A,#0E84D6)",
+                    },
+                    {
+                        nm: "Lumiè",
+                        cat: "Aksesori & jam",
+                        g: "linear-gradient(135deg,#1183D6,#2FD3C0)",
+                    },
+                ],
+                fnb: [
+                    {
+                        nm: "Kopi Tetangga",
+                        cat: "Coffee shop",
+                        g: "linear-gradient(135deg,#0A5C9C,#36A0E8)",
+                    },
+                    {
+                        nm: "Dapur Bunda",
+                        cat: "Frozen food",
+                        g: "linear-gradient(135deg,#0E84D6,#1BC4DC)",
+                    },
+                    {
+                        nm: "Manis Manja",
+                        cat: "Bakery & kue",
+                        g: "linear-gradient(135deg,#06304F,#0B6FBE)",
+                    },
+                ],
+                elektronik: [
+                    {
+                        nm: "GadgetPro",
+                        cat: "Gawai & aksesori",
+                        g: "linear-gradient(135deg,#042438,#0A5C9C)",
+                    },
+                    {
+                        nm: "SoundLab",
+                        cat: "Audio premium",
+                        g: "linear-gradient(135deg,#0B6FBE,#2FD3C0)",
+                    },
+                    {
+                        nm: "PixelGear",
+                        cat: "Kamera & drone",
+                        g: "linear-gradient(135deg,#1183D6,#36A0E8)",
+                    },
+                ],
+                jasa: [
+                    {
+                        nm: "Studio Rupa",
+                        cat: "Jasa desain",
+                        g: "linear-gradient(135deg,#0A5C9C,#1BC4DC)",
+                    },
+                    {
+                        nm: "KelasKita",
+                        cat: "Kursus online",
+                        g: "linear-gradient(135deg,#062E4A,#1183D6)",
+                    },
+                    {
+                        nm: "BookMe",
+                        cat: "Reservasi & booking",
+                        g: "linear-gradient(135deg,#0E84D6,#2FD3C0)",
+                    },
+                ],
+            };
+            const grid = document.getElementById("tplGrid");
+            function renderTpl(cat) {
+                grid.innerHTML = TPL[cat]
+                    .map(
+                        (t) => `
+      <div class="tpl">
+        <div class="shot" style="background:${t.g}">
+          <div class="nav"><span class="lg">${t.nm}</span><span class="dots"><i></i><i></i><i></i></span></div>
+          <div class="hero-t">
+            <div class="t">Koleksi<br>Terbaru</div>
+            <div class="cards"><span></span><span></span><span></span></div>
+          </div>
+        </div>
+        <div class="meta">
+          <div><div class="nm">${t.nm}</div><div class="cat">${t.cat}</div></div>
+          <div class="use">Pakai <svg width="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+      </div>`,
+                    )
+                    .join("");
+            }
+            renderTpl("fashion");
+            document
+                .getElementById("tplTabs")
+                .addEventListener("click", (e) => {
+                    const b = e.target.closest(".tab");
+                    if (!b) return;
+                    document
+                        .querySelectorAll(".tab")
+                        .forEach((t) => t.classList.remove("active"));
+                    b.classList.add("active");
+                    renderTpl(b.dataset.cat);
+                });
+
+            // billing toggle
+            const sw = document.getElementById("billSwitch");
+            let yearly = false;
+            sw.addEventListener("click", () => {
+                yearly = !yearly;
+                sw.classList.toggle("on", yearly);
+                document.querySelectorAll(".price").forEach((p) => {
+                    const v = yearly ? p.dataset.year : p.dataset.month;
+                    p.textContent = v;
+                });
+                document
+                    .querySelectorAll(".cycle")
+                    .forEach(
+                        (c) => (c.textContent = yearly ? "tahunan" : "bulanan"),
+                    );
+            });
+
+            // mobile burger -> smooth scroll to harga (lightweight)
+            document.getElementById("burger").addEventListener("click", () => {
+                document
+                    .getElementById("harga")
+                    .scrollIntoView({ behavior: "smooth" });
+            });
+
+            // subtle cursor glow in hero
+            const hero = document.querySelector(".hero");
+            if (window.matchMedia("(hover:hover)").matches) {
+                const glow = document.createElement("div");
+                glow.style.cssText =
+                    "position:absolute;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(27,196,220,.18),transparent 65%);pointer-events:none;transform:translate(-50%,-50%);z-index:-1;transition:opacity .4s;opacity:0";
+                hero.appendChild(glow);
+                hero.addEventListener("mousemove", (e) => {
+                    const r = hero.getBoundingClientRect();
+                    glow.style.left = e.clientX - r.left + "px";
+                    glow.style.top = e.clientY - r.top + "px";
+                    glow.style.opacity = "1";
+                });
+                hero.addEventListener(
+                    "mouseleave",
+                    () => (glow.style.opacity = "0"),
+                );
+            }
+        </script>
+    </body>
+</html>

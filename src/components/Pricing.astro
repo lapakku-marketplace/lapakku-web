@@ -1,0 +1,92 @@
+---
+import Icon from "./ui/Icon.astro";
+import SectionHeader from "./ui/SectionHeader.astro";
+---
+
+<section class="sec sec-soft" id="harga">
+  <div class="wrap">
+    <SectionHeader
+      kicker="Harga transparan"
+      title="Mulai gratis,"
+      gradient='<span class="grad-text">naik kelas kapan saja.</span>'
+      description="Tanpa biaya tersembunyi. Tanpa kontrak. Batalkan kapan pun kamu mau."
+      center
+    >
+      <div class="inline-flex items-center gap-3 mt-8 font-semibold text-sm text-ink-soft">
+        <span>Bulanan</span>
+        <div class="switch w-14 h-[30px] rounded-full bg-[var(--color-bg-soft-2)] border line relative cursor-pointer transition-colors" id="billSwitch">
+          <div class="knob absolute top-[3px] left-[3px] w-[22px] h-[22px] rounded-full bg-white shadow-sm transition-all duration-300"></div>
+        </div>
+        <span>Tahunan <span class="bg-teal/15 text-[#0E8F7E] text-[.74rem] font-bold px-2 py-0.5 rounded-full">Hemat 20%</span></span>
+      </div>
+    </SectionHeader>
+
+    <div class="grid grid-cols-3 gap-6 max-lg:gap-4 mt-[clamp(2rem,4vw,3rem)] items-stretch max-lg:grid-cols-2 max-md:grid-cols-1">
+      <!-- Pemula -->
+      <div class="rounded-[var(--radius-lg)] bg-white border line p-8 max-md:p-6 shadow-sm flex flex-col hover:-translate-y-1.5 transition-transform duration-500">
+        <h3 class="text-[clamp(1.1rem,1.6vw,1.3rem)] font-bold mb-1.5">Pemula</h3>
+        <p class="text-ink-faint text-sm min-h-[38px]">Untuk yang baru mulai jualan online.</p>
+        <div class="font-heading text-[clamp(2rem,3.6vw,2.7rem)] font-extrabold mt-4 mb-0.5 leading-none">Gratis</div>
+        <div class="text-ink-faint text-sm mb-5">selamanya, tanpa kartu kredit</div>
+        <ul class="flex flex-col gap-3 mb-6 flex-1 list-none">
+          {["Toko online + subdomain", "Hingga 25 produk", "Pembayaran QRIS & e-wallet", "Cek ongkir dasar"].map((f) => (
+            <li class="flex items-start gap-2 text-sm text-ink-soft"><Icon name="check" class="text-teal mt-0.5" size={18} />{f}</li>
+          ))}
+        </ul>
+        <a href="#" class="inline-flex items-center justify-center gap-2 rounded-full font-semibold bg-white/70 backdrop-blur-md text-ink border border-[var(--line-strong)] shadow-sm px-[1.4em] py-[.85em] text-[.96rem] hover:-translate-y-0.5 hover:border-ocean-400 hover:shadow-md transition-all duration-300 w-full">Mulai Gratis</a>
+      </div>
+
+      <!-- Bisnis (Popular) -->
+      <div class="rounded-[var(--radius-lg)] p-8 max-md:p-6 flex flex-col relative scale-105 max-md:scale-100 hover:-translate-y-1.5 transition-transform duration-500" style="background:linear-gradient(165deg,#06304F,#0A5C9C 70%,#0E84D6);color:#fff;box-shadow:var(--shadow-lg);">
+        <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-ocean-400 to-cyan text-white text-[.72rem] font-bold px-3.5 py-1.5 rounded-full shadow-glow whitespace-nowrap">★ Paling Populer</span>
+        <h3 class="text-[clamp(1.1rem,1.6vw,1.3rem)] font-bold mb-1.5">Bisnis</h3>
+        <p class="text-white/70 text-sm min-h-[38px]">Untuk toko yang serius bertumbuh.</p>
+        <div class="font-heading text-[clamp(2rem,3.6vw,2.7rem)] font-extrabold mt-4 mb-0.5 leading-none"><small class="text-base font-semibold text-white/70">Rp</small><span class="price text-white" data-month="149" data-year="119">149</span><small class="text-base font-semibold text-white/70">rb</small></div>
+        <div class="text-white/70 text-sm mb-5">/bulan · ditagih <span class="cycle">bulanan</span></div>
+        <ul class="flex flex-col gap-3 mb-6 flex-1 list-none">
+          {["Semua fitur Pemula", "Produk & varian tak terbatas", "Domain sendiri + tanpa branding", "Flash sale, voucher & loyalitas", "Analitik lengkap + multi-channel"].map((f) => (
+            <li class="flex items-start gap-2 text-sm text-white/85"><Icon name="check" class="text-cyan mt-0.5" size={18} />{f}</li>
+          ))}
+        </ul>
+        <a href="#" class="inline-flex items-center justify-center gap-2 rounded-full font-semibold bg-white text-ocean-700 px-[1.4em] py-[.85em] text-[.96rem] hover:-translate-y-0.5 hover:shadow-[0_24px_50px_-16px_rgba(0,0,0,.35)] transition-all duration-300 w-full">Coba 14 Hari Gratis</a>
+      </div>
+
+      <!-- Enterprise -->
+      <div class="rounded-[var(--radius-lg)] bg-white border line p-8 max-md:p-6 shadow-sm flex flex-col hover:-translate-y-1.5 transition-transform duration-500">
+        <h3 class="text-[clamp(1.1rem,1.6vw,1.3rem)] font-bold mb-1.5">Enterprise</h3>
+        <p class="text-ink-faint text-sm min-h-[38px]">Untuk brand & bisnis berskala besar.</p>
+        <div class="font-heading text-[clamp(2rem,3.6vw,2.7rem)] font-extrabold mt-4 mb-0.5 leading-none"><small class="text-base font-semibold text-ink-faint">Rp</small><span class="price" data-month="499" data-year="399">499</span><small class="text-base font-semibold text-ink-faint">rb</small></div>
+        <div class="text-ink-faint text-sm mb-5">/bulan · ditagih <span class="cycle">bulanan</span></div>
+        <ul class="flex flex-col gap-3 mb-6 flex-1 list-none">
+          {["Semua fitur Bisnis", "Multi-staff & hak akses", "API & integrasi kustom", "Account manager khusus"].map((f) => (
+            <li class="flex items-start gap-2 text-sm text-ink-soft"><Icon name="check" class="text-teal mt-0.5" size={18} />{f}</li>
+          ))}
+        </ul>
+        <a href="#" class="inline-flex items-center justify-center gap-2 rounded-full font-semibold bg-white/70 backdrop-blur-md text-ink border border-[var(--line-strong)] shadow-sm px-[1.4em] py-[.85em] text-[.96rem] hover:-translate-y-0.5 hover:border-ocean-400 hover:shadow-md transition-all duration-300 w-full">Hubungi Sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .sec-soft { background: linear-gradient(180deg, #fff, var(--color-bg-soft) 50%, #fff); }
+  .switch.on { background: linear-gradient(135deg, #0B6FBE 0%, #1183D6 42%, #1BC4DC 100%) !important; }
+  .switch.on .knob { left: 31px !important; }
+</style>
+
+<script>
+  const sw = document.getElementById('billSwitch');
+  if (sw) {
+    let yearly = false;
+    sw.addEventListener('click', () => {
+      yearly = !yearly;
+      sw.classList.toggle('on', yearly);
+      document.querySelectorAll('.price').forEach((p) => {
+        p.textContent = yearly ? p.dataset.year : p.dataset.month;
+      });
+      document.querySelectorAll('.cycle').forEach((c) => {
+        c.textContent = yearly ? 'tahunan' : 'bulanan';
+      });
+    });
+  }
+</script>

@@ -1,0 +1,106 @@
+---
+import SectionHeader from "./ui/SectionHeader.astro";
+---
+
+<section class="sec sec-soft" id="template">
+  <div class="wrap">
+    <SectionHeader
+      kicker="Template siap pakai"
+      title="Desain modern,"
+      gradient='<span class="grad-text">bukan jadul.</span>'
+      description="Puluhan template profesional yang bisa kamu sulap jadi milikmu dalam beberapa klik. Pilih sesuai jenis bisnismu."
+      center
+    >
+      <div class="inline-flex gap-1 p-1.5 bg-[var(--color-bg-soft-2)] rounded-full border line mt-8 flex-wrap justify-center" id="tplTabs">
+        {["fashion", "fnb", "elektronik", "jasa"].map((cat, i) => (
+          <button class="tab ${i === 0 ? 'active' : ''}" data-cat={cat}>
+            {cat === "fashion" ? "Fashion" : cat === "fnb" ? "F&B" : cat === "elektronik" ? "Elektronik" : "Jasa"}
+          </button>
+        ))}
+      </div>
+    </SectionHeader>
+    <div class="grid grid-cols-3 gap-6 max-lg:grid-cols-2 max-md:grid-cols-1 mt-11" id="tplGrid"></div>
+  </div>
+</section>
+
+<style is:global>
+  .sec-soft { background: linear-gradient(180deg, #fff, var(--color-bg-soft) 50%, #fff); }
+  .tab {
+    padding: .6rem 1.2rem; border-radius: 999px; font-weight: 600; font-size: .92rem;
+    cursor: pointer; color: var(--color-ink-soft); border: none; background: transparent;
+    transition: all .3s var(--ease-spring);
+  }
+  .tab.active { background: #fff; color: var(--color-ocean-700); box-shadow: var(--shadow-sm); }
+  @media (max-width: 480px) { .tab { padding: .45rem .9rem; font-size: .82rem; } }
+  .tpl {
+    border-radius: var(--radius-lg); overflow: hidden; background: #fff; border: 1px solid rgba(11,111,190,.14);
+    box-shadow: var(--shadow-sm); transition: transform .45s var(--ease-spring), box-shadow .45s var(--ease-spring);
+    cursor: pointer;
+  }
+  .tpl:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+  .tpl .shot { height: clamp(160px, 22vw, 210px); position: relative; overflow: hidden; display: flex; flex-direction: column; padding: clamp(12px, 1.8vw, 18px); gap: clamp(6px, 1vw, 10px); }
+  .tpl .shot .lg { font-family: var(--font-heading); font-weight: 800; font-size: .85rem; color: #fff; }
+  .tpl .shot .dots i { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,.6); display: block; }
+  .tpl .shot .hero-t { margin-top: auto; color: #fff; }
+  .tpl .shot .hero-t .t { font-family: var(--font-heading); font-weight: 800; font-size: clamp(1rem, 1.6vw, 1.25rem); line-height: 1.1; }
+  .tpl .shot .hero-t .cards span { flex: 1; height: clamp(32px, 4vw, 44px); border-radius: 9px; background: rgba(255,255,255,.85); }
+  .tpl .meta { padding: clamp(12px, 1.8vw, 18px) clamp(14px, 2vw, 20px); display: flex; align-items: center; justify-content: space-between; }
+  .tpl .meta .nm { font-weight: 700; font-size: 1rem; }
+  .tpl .meta .cat { font-size: .78rem; color: var(--color-ink-faint); }
+  .tpl .meta .use { font-size: .8rem; font-weight: 700; color: var(--color-ocean-600); display: flex; align-items: center; gap: .3rem; }
+</style>
+
+<script>
+  const TPL = {
+    fashion: [
+      { nm: 'Nara Studio', cat: 'Pakaian wanita', g: 'linear-gradient(135deg,#0B6FBE,#1BC4DC)' },
+      { nm: 'Urban Thread', cat: 'Streetwear', g: 'linear-gradient(135deg,#062E4A,#0E84D6)' },
+      { nm: 'Lumiè', cat: 'Aksesori & jam', g: 'linear-gradient(135deg,#1183D6,#2FD3C0)' },
+    ],
+    fnb: [
+      { nm: 'Kopi Tetangga', cat: 'Coffee shop', g: 'linear-gradient(135deg,#0A5C9C,#36A0E8)' },
+      { nm: 'Dapur Bunda', cat: 'Frozen food', g: 'linear-gradient(135deg,#0E84D6,#1BC4DC)' },
+      { nm: 'Manis Manja', cat: 'Bakery & kue', g: 'linear-gradient(135deg,#06304F,#0B6FBE)' },
+    ],
+    elektronik: [
+      { nm: 'GadgetPro', cat: 'Gawai & aksesori', g: 'linear-gradient(135deg,#042438,#0A5C9C)' },
+      { nm: 'SoundLab', cat: 'Audio premium', g: 'linear-gradient(135deg,#0B6FBE,#2FD3C0)' },
+      { nm: 'PixelGear', cat: 'Kamera & drone', g: 'linear-gradient(135deg,#1183D6,#36A0E8)' },
+    ],
+    jasa: [
+      { nm: 'Studio Rupa', cat: 'Jasa desain', g: 'linear-gradient(135deg,#0A5C9C,#1BC4DC)' },
+      { nm: 'KelasKita', cat: 'Kursus online', g: 'linear-gradient(135deg,#062E4A,#1183D6)' },
+      { nm: 'BookMe', cat: 'Reservasi & booking', g: 'linear-gradient(135deg,#0E84D6,#2FD3C0)' },
+    ],
+  };
+
+  const grid = document.getElementById('tplGrid');
+  function renderTpl(cat) {
+    grid.innerHTML = TPL[cat].map(t => `
+      <div class="tpl">
+        <div class="shot" style="background:${t.g}">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span class="lg">${t.nm}</span>
+            <span class="dots" style="display:flex;gap:.3rem"><i></i><i></i><i></i></span>
+          </div>
+          <div class="hero-t">
+            <div class="t">Koleksi<br>Terbaru</div>
+            <div class="cards" style="display:flex;gap:.5rem;margin-top:.75rem"><span></span><span></span><span></span></div>
+          </div>
+        </div>
+        <div class="meta">
+          <div><div class="nm">${t.nm}</div><div class="cat">${t.cat}</div></div>
+          <div class="use">Pakai <svg width="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+      </div>`).join('');
+  }
+  renderTpl('fashion');
+
+  document.getElementById('tplTabs').addEventListener('click', (e) => {
+    const b = e.target.closest('.tab');
+    if (!b) return;
+    document.querySelectorAll('.tab').forEach((t) => t.classList.remove('active'));
+    b.classList.add('active');
+    renderTpl(b.dataset.cat);
+  });
+</script>

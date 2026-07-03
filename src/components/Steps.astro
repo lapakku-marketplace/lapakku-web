@@ -1,0 +1,53 @@
+---
+import SectionHeader from "./ui/SectionHeader.astro";
+import Icon from "./ui/Icon.astro";
+---
+
+<section class="sec">
+    <div class="wrap">
+        <SectionHeader
+            kicker="Mulai dalam menit"
+            title="Dari nol ke jualan,"
+            gradient='<span class="grad-text">secepat itu.</span>'
+            center
+        />
+        <div
+            class="grid grid-cols-3 gap-6 max-lg:gap-4 max-md:gap-4 mt-[clamp(2rem,4.4vw,3.5rem)] max-lg:grid-cols-2 max-md:grid-cols-1"
+        >
+            {
+                [
+                    {
+                        n: "01",
+                        title: "Daftar & pilih nama toko",
+                        desc: "Buat akun gratis, klaim alamat tokomu (namamu.Lapakku.id) atau pakai domain sendiri.",
+                    },
+                    {
+                        n: "02",
+                        title: "Atur tampilan & produk",
+                        desc: "Pilih template, upload produk, atur harga & stok. Semua dengan editor drag-and-drop.",
+                    },
+                    {
+                        n: "03",
+                        title: "Publikasikan & jualan",
+                        desc: "Aktifkan pembayaran & kurir, sebarkan link tokomu, dan mulai terima pesanan pertama.",
+                    },
+                ].map((s, i) => (
+                    <div class="relative p-7 max-md:p-5 rounded-[var(--radius-lg)] bg-white border line shadow-sm">
+                        <div class="font-heading text-[2.6rem] font-extrabold text-transparent [-webkit-text-stroke:1.5px_var(--color-ocean-400)] leading-none opacity-55">
+                            {s.n}
+                        </div>
+                        <h3 class="text-[1.22rem] font-bold mt-3.5 mb-2">
+                            {s.title}
+                        </h3>
+                        <p class="text-ink-soft text-sm">{s.desc}</p>
+                        {i < 2 && (
+                            <span class="absolute top-[42px] -right-[22px] text-ocean-400 max-md:hidden">
+                                <Icon name="arrow-right" size={44} />
+                            </span>
+                        )}
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</section>

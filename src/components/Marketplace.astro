@@ -1,0 +1,38 @@
+---
+import Icon from "./ui/Icon.astro";
+import SectionHeader from "./ui/SectionHeader.astro";
+---
+
+<section class="sec relative overflow-hidden" id="marketplace" style="background:linear-gradient(160deg,#042438,#073f63 70%,#0A5C9C);color:#fff">
+  <span class="absolute w-[600px] h-[600px] rounded-full bg-[radial-gradient(circle,rgba(27,196,220,.25),transparent_65%)] -top-[200px] -right-[100px] pointer-events-none"></span>
+  <span class="absolute inset-0 pointer-events-none" style="background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2240%22 height=%2240%22%3E%3Cpath d=%22M0 20h40M20 0v40%27 stroke=%27%23ffffff%27 stroke-opacity=%220.04%22 stroke-width=%221%22/%3E%3C/svg%3E')"></span>
+  <div class="wrap relative z-10">
+    <SectionHeader
+      kicker="Pengalaman ala marketplace"
+      title="Rasa Shopee &amp; Tokopedia,"
+      gradient='<span class="grad-text">tapi tokomu sendiri.</span>'
+      description="Pembeli sudah terbiasa dengan fitur marketplace. Kami hadirkan semuanya di tokomu, jadi mereka langsung nyaman dan tidak ragu checkout."
+      center
+    />
+    <div class="grid grid-cols-4 gap-4 max-lg:gap-3 mt-[clamp(2rem,4.4vw,3.5rem)] max-lg:grid-cols-2 max-md:grid-cols-1">
+      {[
+        { icon: "cart", title: "Keranjang & Checkout", desc: "Alur belanja singkat dan familiar yang menekan cart abandonment." },
+        { icon: "bolt", title: "Flash Sale & Countdown", desc: "Bikin promo kilat dengan timer untuk memicu pembelian impulsif." },
+        { icon: "tag", title: "Voucher & Promo", desc: "Kupon diskon, gratis ongkir, cashback, hingga bundling produk." },
+        { icon: "star", title: "Rating & Ulasan", desc: "Review berfoto dari pembeli yang membangun kepercayaan calon pembeli." },
+        { icon: "heart", title: "Program Loyalitas", desc: "Poin reward & membership untuk bikin pembeli balik lagi dan lagi." },
+        { icon: "credit-card", title: "Toko Mobile-First", desc: "Tampilan ngebut & mulus di HP, tempat 80% pembeli berbelanja." },
+        { icon: "shield", title: "Proteksi Pembeli", desc: "Sistem dispute & escrow yang bikin transaksi terasa aman." },
+        { icon: "layers", title: "Multi-Channel", desc: "Jual sekaligus ke Instagram, TikTok Shop & marketplace lain." },
+      ].map((item) => (
+        <div class="bg-white/5 border border-white/10 rounded-[var(--radius-md)] p-6 backdrop-blur-sm hover:-translate-y-1.5 hover:bg-white/10 transition-all duration-500">
+          <div class="w-[46px] h-[46px] rounded-[13px] grad-ocean shadow-glow grid place-items-center mb-4">
+            <Icon name={item.icon} class="text-white" size={22} />
+          </div>
+          <h4 class="text-lg font-bold mb-1.5">{item.title}</h4>
+          <p class="text-white/70 text-sm">{item.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

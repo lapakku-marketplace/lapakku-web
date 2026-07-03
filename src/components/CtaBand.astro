@@ -1,0 +1,49 @@
+---
+import Icon from "./ui/Icon.astro";
+---
+
+<section class="sec" style="padding-top:clamp(12px,2vw,20px)">
+    <div class="wrap reveal">
+        <div
+            class="relative rounded-[var(--radius-xl)] py-[clamp(40px,6vw,72px)] px-14 max-md:px-7 overflow-hidden text-center text-white"
+            style="background:linear-gradient(135deg,#06304F,#0A5C9C 55%,#0E84D6);box-shadow:var(--shadow-lg);"
+        >
+            <span
+                class="absolute w-[500px] h-[500px] rounded-full bg-[radial-gradient(circle,rgba(27,196,220,.4),transparent_60%)] -top-[180px] -left-[120px] pointer-events-none"
+            ></span>
+            <span
+                class="absolute w-[400px] h-[400px] rounded-full bg-[radial-gradient(circle,rgba(47,211,192,.3),transparent_60%)] -bottom-[160px] -right-[100px] pointer-events-none"
+            ></span>
+            <div class="relative z-10">
+                <h2
+                    class="font-heading text-[clamp(2rem,4vw,3.2rem)] font-extrabold -tracking-[.03em]"
+                >
+                    Siap punya toko sendiri?
+                </h2>
+                <p
+                    class="text-white/80 text-lg mt-[18px] mb-8 max-w-[34rem] mx-auto"
+                >
+                    Bergabung dengan ratusan ribu penjual yang sudah membangun
+                    bisnisnya di Lapakku. Gratis untuk memulai, tanpa risiko.
+                </p>
+                <div class="flex gap-3 justify-center flex-wrap">
+                    <a
+                        href="#"
+                        class="inline-flex items-center gap-2 rounded-full font-semibold bg-white text-ocean-700 px-[1.8em] py-[1.05em] text-[1.02rem] hover:-translate-y-0.5 hover:shadow-[0_24px_50px_-16px_rgba(0,0,0,.35)] transition-all duration-300"
+                    >
+                        Buka Toko Sekarang
+                        <Icon name="arrow-right" size={20} />
+                    </a>
+                    <a
+                        href="#"
+                        class="inline-flex items-center gap-2 rounded-full font-semibold bg-white/10 backdrop-blur-md text-white border border-white/40 px-[1.8em] py-[1.05em] text-[1.02rem] hover:-translate-y-0.5 hover:bg-white/20 transition-all duration-300"
+                        >Jadwalkan Demo</a
+                    >
+                </div>
+                <p class="text-white/70 text-sm mt-5">
+                    Gratis selamanya · Tanpa kartu kredit · Setup dalam 5 menit
+                </p>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,36 @@
+---
+export interface Props {
+  kicker?: string;
+  title: string;
+  gradient?: string;
+  description?: string;
+  center?: boolean;
+}
+
+const { kicker, title, gradient, description, center = false } = Astro.props;
+---
+
+<div class={`max-w-[38rem] ${center ? "mx-auto text-center" : ""}`}>
+  {
+    kicker && (
+      <span class="inline-flex items-center gap-2 text-sm font-bold text-ocean-600 uppercase tracking-[.1em] mb-4">
+        <span class="w-[22px] h-[2px] rounded-full grad-ocean"></span>
+        {kicker}
+      </span>
+    )
+  }
+  <h2 class="font-heading text-[clamp(2rem,3.6vw,3rem)] font-extrabold -tracking-[.03em]">
+    {title}
+    {
+      gradient && (
+        <> <span set:html={gradient} /></>
+      )
+    }
+  </h2>
+  {
+    description && (
+      <p class="text-ink-soft text-[1.08rem] mt-[18px]">{description}</p>
+    )
+  }
+  <slot />
+</div>

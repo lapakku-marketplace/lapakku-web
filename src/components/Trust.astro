@@ -1,0 +1,25 @@
+<section class="pt-12 max-md:pt-8 pb-2 text-center">
+  <div class="wrap reveal">
+    <p class="text-sm text-ink-faint font-semibold tracking-wider uppercase mb-6">Terintegrasi dengan layanan pembayaran &amp; logistik favorit</p>
+    <div class="overflow-hidden mask-[linear-gradient(90deg,transparent,black_12%,black_88%,transparent)]">
+      <div class="flex gap-[clamp(1.5rem,4.4vw,3.5rem)] w-max animate-[scroll_26s_linear_infinite] hover:[animation-play-state:paused]">
+        {[...Array(2)].map(() => (
+          <>
+            {["BayarCepat", "DompetKu", "KirimAja", "QRIS", "LajuKurir", "InstaPay", "SiCepat Box"].map((n) => (
+              <span class="flex items-center gap-2 text-ink-faint font-bold text-lg font-heading opacity-70 hover:opacity-100 hover:text-ocean-700 transition whitespace-nowrap">
+                <span class="w-[26px] h-[26px] rounded-lg bg-gradient-to-br from-ocean-400 to-cyan opacity-85"></span>
+                {n}
+              </span>
+            ))}
+          </>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes scroll {
+    to { transform: translateX(-50%); }
+  }
+</style>

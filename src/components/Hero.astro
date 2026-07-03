@@ -1,0 +1,384 @@
+---
+import Icon from "./ui/Icon.astro";
+---
+
+<section
+    class="hero relative pt-[clamp(100px,18vw,170px)] pb-[clamp(50px,8vw,90px)] overflow-hidden"
+>
+    <!-- Background -->
+    <div
+        class="absolute inset-0 z-[-2]"
+        style="background: radial-gradient(120% 80% at 78% 8%, rgba(27,196,220,.22), transparent 55%), radial-gradient(100% 80% at 8% 0%, rgba(17,131,214,.18), transparent 50%), linear-gradient(180deg, #F4FAFF 0%, #FFFFFF 70%);"
+    >
+    </div>
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+
+    <div class="wrap">
+        <div
+            class="grid grid-cols-[1.05fr_0.95fr] gap-12 items-center max-lg:grid-cols-1 max-lg:gap-[clamp(30px,6vw,60px)]"
+        >
+            <!-- Copy -->
+            <div class="reveal">
+                <span
+                    class="inline-flex items-center gap-2 px-3 py-1.5 pl-5 bg-white/70 backdrop-blur-md border border-[var(--line-strong)] rounded-full text-sm font-semibold text-ocean-700 shadow-sm mb-6"
+                >
+                    <span
+                        class="grad-ocean text-white text-[.72rem] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full"
+                        >Baru</span
+                    >
+                    Integrasi WhatsApp Commerce &amp; QRIS
+                </span>
+                <h1
+                    class="text-[clamp(2.6rem,5.4vw,4.3rem)] font-extrabold -tracking-[.035em]"
+                >
+                    Bangun toko online-mu, <span class="grad-text"
+                        >tanpa ribet.</span
+                    >
+                </h1>
+                <p
+                    class="text-[clamp(1.05rem,1.5vw,1.22rem)] text-ink-soft max-w-[30em] my-6 mb-9"
+                >
+                    Platform all-in-one untuk bikin toko online yang cantik
+                    dalam hitungan menit. Fitur selengkap marketplace —
+                    checkout, ongkir, voucher, chat — tapi tokomu, brandmu,
+                    datamu sendiri.
+                </p>
+                <div class="flex items-center gap-3 flex-wrap items-center">
+                    <a
+                        href="#harga"
+                        class="inline-flex items-center gap-2 rounded-full font-semibold text-white px-[1.8em] py-[1.05em] text-[clamp(.9rem,1.2vw,1.02rem)] grad-ocean shadow-glow shadow-[inset_0_1px_0_rgba(255,255,255,.4)] hover:-translate-y-0.5 hover:shadow-[0_28px_60px_-12px_rgba(17,131,214,.7),inset_0_1px_0_rgba(255,255,255,.5)] transition-all duration-300"
+                    >
+                        Buka Toko Gratis
+                        <Icon name="arrow-right" size={20} />
+                    </a>
+                    <a
+                        href="#template"
+                        class="inline-flex items-center gap-2 rounded-full font-semibold bg-white/70 backdrop-blur-md text-ink border border-[var(--line-strong)] shadow-sm px-[1.8em] py-[1.05em] text-[clamp(.9rem,1.2vw,1.02rem)] hover:-translate-y-0.5 hover:border-ocean-400 hover:shadow-md transition-all duration-300"
+                    >
+                        <Icon name="play" size={20} />
+                        Lihat Demo
+                    </a>
+                </div>
+                <div class="flex items-center gap-5 mt-8 flex-wrap">
+                    <div class="flex">
+                        {
+                            [0, 1, 2, 3].map((i) => (
+                                <span
+                                    class={`w-[34px] h-[34px] rounded-full border-2 border-white shadow-sm -ml-[10px] first:ml-0 bg-gradient-to-br ${
+                                        i === 0
+                                            ? "from-ocean-400 to-cyan"
+                                            : i === 1
+                                              ? "from-teal to-cyan"
+                                              : i === 2
+                                                ? "from-ocean-700 to-ocean-400"
+                                                : "from-ocean-500 to-teal"
+                                    }`}
+                                />
+                            ))
+                        }
+                    </div>
+                    <small class="text-sm text-ink-soft leading-tight"
+                        ><b class="text-ink font-bold">120.000+</b> penjual sudah
+                        jualan<br /><span class="text-[#FFB020] tracking-wide"
+                            >★★★★★</span
+                        > rata-rata 4.9/5</small
+                    >
+                </div>
+            </div>
+
+            <!-- Mockup -->
+            <div
+                class="mock relative perspective-[1600px] max-lg:mx-auto"
+                style="max-width:clamp(320px,42vw,480px)"
+            >
+                <div
+                    class="browser bg-white border line rounded-[22px] shadow-lg overflow-hidden transition-transform duration-500"
+                    style="transform: rotateY(-9deg) rotateX(4deg) rotate(1deg); transform-style: preserve-3d;"
+                >
+                    <div
+                        class="flex items-center gap-2 px-4 py-3 border-b line bg-gradient-to-b from-white to-[#F6FBFF]"
+                    >
+                        <i class="w-[11px] h-[11px] rounded-full bg-[#FF6B6B]"
+                        ></i>
+                        <i class="w-[11px] h-[11px] rounded-full bg-[#FFD166]"
+                        ></i>
+                        <i class="w-[11px] h-[11px] rounded-full bg-[#2FD3C0]"
+                        ></i>
+                        <span
+                            class="ml-3 flex-1 bg-[#EEF5FB] rounded-[7px] px-3 py-1 text-[.72rem] text-ink-faint font-medium"
+                            >tokorani.Lapakku.id</span
+                        >
+                    </div>
+                    <div
+                        class="flex items-center justify-between px-4 py-3.5 border-b line"
+                    >
+                        <div
+                            class="flex items-center gap-2 font-heading font-extrabold text-sm"
+                        >
+                            <span
+                                class="w-7 h-7 rounded-lg grad-ocean grid place-items-center text-white text-xs"
+                                >R</span
+                            >
+                            Toko Rani
+                        </div>
+                        <div class="flex gap-2 text-ink-faint">
+                            <span
+                                class="w-[30px] h-[30px] rounded-lg bg-[#F2F8FD] grid place-items-center"
+                                ><Icon name="search" size={15} /></span
+                            >
+                            <span
+                                class="w-[30px] h-[30px] rounded-lg bg-[#F2F8FD] grid place-items-center"
+                                ><Icon name="heart" size={15} /></span
+                            >
+                            <span
+                                class="w-[30px] h-[30px] rounded-lg bg-[#F2F8FD] grid place-items-center relative"
+                                ><Icon name="cart" size={15} /><span
+                                    class="absolute -top-1 -right-1 bg-cyan text-white text-[.6rem] font-bold w-[15px] h-[15px] rounded-full grid place-items-center"
+                                    >3</span
+                                ></span
+                            >
+                        </div>
+                    </div>
+                    <div
+                        class="mx-3.5 my-3 rounded-xl grad-ocean p-4 text-white relative overflow-hidden shadow-glow"
+                    >
+                        <span
+                            class="absolute w-[120px] h-[120px] rounded-full bg-white/20 -top-10 -right-5"
+                        ></span>
+                        <small
+                            class="text-[.68rem] opacity-85 uppercase tracking-wider font-semibold"
+                            >Flash Sale · Berakhir 02:14:55</small
+                        >
+                        <h5 class="font-heading text-lg font-bold mt-0.5">
+                            Diskon s/d 70%
+                        </h5>
+                        <span
+                            class="inline-block mt-2 bg-white text-ocean-700 text-[.7rem] font-bold px-2.5 py-1 rounded-full"
+                            >Belanja sekarang</span
+                        >
+                    </div>
+                    <div class="grid grid-cols-3 gap-[.7rem] px-4 pb-5">
+                        {
+                            [
+                                {
+                                    nm: "Tas Kulit Premium",
+                                    pr: "Rp 249.000",
+                                    rt: "★ 4.9 · 1,2rb",
+                                },
+                                {
+                                    nm: "Sepatu Sneakers",
+                                    pr: "Rp 389.000",
+                                    rt: "★ 4.8 · 980",
+                                },
+                                {
+                                    nm: "Jam Tangan",
+                                    pr: "Rp 520.000",
+                                    rt: "★ 5.0 · 640",
+                                },
+                                {
+                                    nm: "Kacamata",
+                                    pr: "Rp 175.000",
+                                    rt: "★ 4.7 · 410",
+                                },
+                                {
+                                    nm: "Dompet Kulit",
+                                    pr: "Rp 129.000",
+                                    rt: "★ 4.9 · 2,1rb",
+                                },
+                                {
+                                    nm: "Topi Bucket",
+                                    pr: "Rp 89.000",
+                                    rt: "★ 4.8 · 750",
+                                },
+                            ].map((p) => (
+                                <div class="border line rounded-xl overflow-hidden bg-white hover:-translate-y-0.5 transition-transform">
+                                    <div class="h-[54px] bg-gradient-to-br from-[#E5F1FC] to-[#D2E9FA]" />
+                                    <div class="p-1.5">
+                                        <div class="text-[.62rem] text-ink-soft font-semibold">
+                                            {p.nm}
+                                        </div>
+                                        <div class="text-[.72rem] font-extrabold text-ocean-700 mt-0.5">
+                                            {p.pr}
+                                        </div>
+                                        <div class="text-[.55rem] text-ink-faint mt-0.5">
+                                            {p.rt}
+                                        </div>
+                                    </div>
+                                </div>
+                            ))
+                        }
+                    </div>
+                </div>
+
+                <!-- Chips -->
+                <div class="chip c1" style="top:6%;left:-7%;">
+                    <div
+                        class="w-[34px] h-[34px] rounded-[10px] bg-gradient-to-br from-teal to-cyan grid place-items-center text-white"
+                    >
+                        <Icon name="package" size={18} />
+                    </div>
+                    <div>
+                        <small
+                            class="text-[.66rem] text-ink-faint font-semibold"
+                            >Pesanan baru</small
+                        ><b class="text-sm font-extrabold text-ink block"
+                            >+Rp 249.000</b>
+                    </div>
+                </div>
+                <div
+                    class="chip c2"
+                    style="bottom:14%;right:-8%;animation-delay:-2.5s;min-width:160px;"
+                >
+                    <div class="flex items-center justify-between mb-1.5">
+                        <small
+                            class="text-[.66rem] text-ink-faint font-semibold"
+                            >Penjualan hari ini</small
+                        ><span
+                            class="text-[.62rem] text-[#16B07A] font-bold bg-[rgba(22,176,122,.12)] px-1.5 py-0.5 rounded-[6px]"
+                            >▲ 24%</span>
+                    </div>
+                    <b class="font-heading text-lg font-extrabold text-ink"
+                        >Rp 8.420.000</b
+                    >
+                    <div class="flex items-end gap-[3px] h-[26px] mt-1.5">
+                        {
+                            [
+                                "40%",
+                                "65%",
+                                "45%",
+                                "80%",
+                                "60%",
+                                "95%",
+                                "75%",
+                            ].map((h) => (
+                                <i
+                                    class="flex-1 grad-ocean rounded-[3px]"
+                                    style={`height:${h}`}
+                                />
+                            ))
+                        }
+                    </div>
+                </div>
+                <div
+                    class="chip c3"
+                    style="top:46%;right:-11%;animation-delay:-1.2s;"
+                >
+                    <span class="text-[#FFB020] text-base">★</span>
+                    <div>
+                        <b class="text-sm font-extrabold">4.9</b><small
+                            class="text-[.62rem] text-ink-faint block"
+                            >320 ulasan</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .blob {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(70px);
+        opacity: 0.55;
+        z-index: -1;
+        animation: float 14s ease-in-out infinite;
+    }
+    .blob.b1 {
+        width: min(460px, 70vw);
+        height: min(460px, 70vw);
+        background: radial-gradient(circle, #36a0e8, transparent 70%);
+        top: -120px;
+        right: -80px;
+    }
+    .blob.b2 {
+        width: min(380px, 60vw);
+        height: min(380px, 60vw);
+        background: radial-gradient(circle, #2fd3c0, transparent 70%);
+        bottom: -120px;
+        left: -100px;
+        animation-delay: -7s;
+    }
+    @keyframes float {
+        0%,
+        100% {
+            transform: translate(0, 0) scale(1);
+        }
+        50% {
+            transform: translate(20px, -30px) scale(1.08);
+        }
+    }
+    .mock:hover .browser {
+        transform: rotateY(-4deg) rotateX(2deg) !important;
+    }
+    .chip {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.66);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        border-radius: 16px;
+        padding: 0.7rem 0.85rem;
+        box-shadow: var(--shadow-md);
+        z-index: 3;
+        animation: bob 5s ease-in-out infinite;
+    }
+    @keyframes bob {
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-9px);
+        }
+    }
+    @media (max-width: 480px) {
+        .chip {
+            display: none;
+        }
+    }
+    @media (max-width: 640px) {
+        .browser {
+            transform: none !important;
+        }
+        .mock:hover .browser {
+            transform: none !important;
+        }
+        .blob {
+            filter: blur(40px);
+        }
+        .blob.b1 {
+            width: 180px;
+            height: 180px;
+            top: -40px;
+            right: -40px;
+        }
+        .blob.b2 {
+            width: 140px;
+            height: 140px;
+            bottom: -40px;
+            left: -40px;
+        }
+    }
+</style>
+
+<script>
+    const heroSection = document.querySelector(".hero");
+    if (heroSection && window.matchMedia("(hover:hover)").matches) {
+        const glow = document.createElement("div");
+        glow.style.cssText =
+            "position:absolute;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(27,196,220,.18),transparent 65%);pointer-events:none;transform:translate(-50%,-50%);z-index:-1;transition:opacity .4s;opacity:0";
+        heroSection.appendChild(glow);
+        heroSection.addEventListener("mousemove", (e) => {
+            const r = heroSection.getBoundingClientRect();
+            glow.style.left = `${e.clientX - r.left}px`;
+            glow.style.top = `${e.clientY - r.top}px`;
+            glow.style.opacity = "1";
+        });
+        heroSection.addEventListener(
+            "mouseleave",
+            () => (glow.style.opacity = "0"),
+        );
+    }
+</script>

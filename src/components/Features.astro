@@ -1,0 +1,124 @@
+---
+import Icon from "./ui/Icon.astro";
+import SectionHeader from "./ui/SectionHeader.astro";
+---
+
+<section class="sec" id="fitur">
+  <div class="wrap">
+    <SectionHeader
+      kicker="Semua yang kamu butuh"
+      title="Satu platform,"
+      gradient='<span class="grad-text">toko lengkap.</span>'
+      description="Tidak perlu coding, tidak perlu pasang plugin satu per satu. Semua tools untuk jualan online sudah jadi dan tinggal pakai."
+    />
+
+    <div class="grid grid-cols-4 grid-rows-[auto] gap-4 max-lg:gap-3 max-md:gap-3 mt-[clamp(2rem,4.4vw,3.5rem)] max-lg:grid-cols-2 max-md:grid-cols-1">
+      <!-- Builder -->
+      <div class="card col-span-2 row-span-2 max-md:col-auto max-md:row-auto" style="background:linear-gradient(160deg,#06304F,#0A5C9C 65%,#0E84D6);color:#fff;border:none;display:flex;flex-direction:column">
+        <div class="w-[50px] h-[50px] rounded-xl grid place-items-center mb-4 bg-white/15 text-white">
+          <Icon name="store" size={24} />
+        </div>
+        <h3 class="text-white text-xl font-bold mb-2">Page Builder Drag &amp; Drop</h3>
+        <p class="text-white/80 text-sm">Susun halaman tokomu seperti menyusun balok. Geser komponen, atur warna, langsung live. Tanpa satu baris kode pun.</p>
+        <span class="self-start mt-3.5 bg-white/15 border border-dashed border-white/40 rounded-full text-[.72rem] px-3 py-1.5 font-semibold">⠿ Tarik &amp; lepas blok</span>
+        <div class="mt-auto bg-white/10 border border-white/15 rounded-xl p-4 backdrop-blur-sm grid grid-cols-[64px_1fr] gap-3">
+          <div class="flex flex-col gap-2">{[...Array(3)].map(() => <i class="h-[30px] rounded-lg bg-white/15 block relative after:absolute after:inset-[8px] after:bg-white/40 after:rounded-[4px]"></i>)}</div>
+          <div class="bg-white/95 rounded-xl p-3 flex flex-col gap-2">
+            <div class="h-[14px] w-[55%] grad-ocean rounded-[5px]"></div>
+            <div class="h-[8px] bg-[#D6E8F7] rounded-[4px]"></div>
+            <div class="h-[8px] bg-[#D6E8F7] w-[75%] rounded-[4px]"></div>
+            <div class="grid grid-cols-3 gap-1.5 mt-1">{[...Array(3)].map(() => <span class="h-[34px] rounded-[7px] bg-gradient-to-br from-[#E5F1FC] to-[#CFE9FA]"></span>)}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pembayaran -->
+      <div class="card feature">
+        <div class="ico"><Icon name="credit-card" size={24} /></div>
+        <h3>Pembayaran Instan</h3>
+        <p>QRIS, e-wallet, transfer bank, hingga cicilan. Dana langsung masuk, otomatis terekonsiliasi.</p>
+      </div>
+
+      <!-- Ongkir -->
+      <div class="card feature">
+        <div class="ico"><Icon name="truck" size={24} /></div>
+        <h3>Ongkir &amp; Multi-Kurir</h3>
+        <p>Cek ongkir real-time dari belasan kurir, cetak resi & lacak paket langsung dari dashboard.</p>
+      </div>
+
+      <!-- Analitik -->
+      <div class="card col-span-2 max-md:col-auto">
+        <div class="ico"><Icon name="chart" size={24} /></div>
+        <h3>Analitik Real-time</h3>
+        <p>Pantau penjualan, produk terlaris, sumber traffic, dan perilaku pembeli dalam satu dashboard yang mudah dibaca — bukan angka yang bikin pusing.</p>
+      </div>
+
+      <!-- Stat -->
+      <div class="card" style="background:linear-gradient(160deg,#fff,#EAF4FD);">
+        <div class="font-heading text-[clamp(1.8rem,3.2vw,2.4rem)] font-extrabold grad-text leading-none" data-count="99.9" data-suffix="%" data-decimals="1">0%</div>
+        <div class="text-ink-soft text-sm mt-1.5">Uptime server, toko selalu siap melayani 24/7</div>
+      </div>
+
+      <!-- Chat -->
+      <div class="card feature">
+        <div class="ico"><Icon name="chat" size={24} /></div>
+        <h3>Chat Penjual</h3>
+        <p>Live chat menyatu dengan WhatsApp. Balas pembeli cepat, closing makin gampang.</p>
+      </div>
+
+      <!-- Stok -->
+      <div class="card feature">
+        <div class="ico"><Icon name="box" size={24} /></div>
+        <h3>Kelola Stok &amp; Varian</h3>
+        <p>Atur stok, varian warna/ukuran, dan harga grosir. Notifikasi otomatis saat stok menipis.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .card {
+    position: relative;
+    border-radius: var(--radius-lg);
+    padding: clamp(20px, 2.2vw, 28px);
+    background: #fff;
+    border: 1px solid rgba(11,111,190,.14);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    transition: transform .45s var(--ease-spring), box-shadow .45s var(--ease-spring), border-color .3s;
+  }
+  .card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); border-color: rgba(11,111,190,.22); }
+  .card.feature { background: radial-gradient(120% 120% at 100% 0%, rgba(27,196,220,.16), transparent 50%), #fff; }
+  .card .ico {
+    width: 50px; height: 50px; border-radius: 14px; display: grid; place-items: center;
+    margin-bottom: clamp(12px, 1.4vw, 18px); background: linear-gradient(135deg, rgba(17,131,214,.12), rgba(27,196,220,.12));
+    color: var(--color-ocean-600);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.6);
+  }
+  .card h3 { font-size: clamp(1rem, 1.4vw, 1.2rem); font-weight: 700; margin-bottom: clamp(4px, .6vw, 8px); }
+  .card p { color: var(--color-ink-soft); font-size: clamp(.85rem, .95vw, .95rem); }
+</style>
+
+<script>
+  const counters = document.querySelectorAll('[data-count]');
+  if (counters.length) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const el = e.target, target = parseFloat(el.dataset.count);
+        const dec = parseInt(el.dataset.decimals || '0'), suf = el.dataset.suffix || '';
+        let cur = 0; const dur = 1600, t0 = performance.now();
+        const tick = (t) => {
+          const p = Math.min((t - t0) / dur, 1);
+          const ease = 1 - Math.pow(1 - p, 3);
+          cur = target * ease;
+          el.textContent = cur.toFixed(dec) + suf;
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+        observer.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+    counters.forEach((c) => observer.observe(c));
+  }
+</script>

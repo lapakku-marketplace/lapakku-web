@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand colors */
+  --color-ink: #07263B;
+  --color-ink-soft: #456178;
+  --color-ink-faint: #7C93A4;
+
+  --color-ocean-950: #042438;
+  --color-ocean-900: #062E4A;
+  --color-ocean-700: #0A5C9C;
+  --color-ocean-600: #0B6FBE;
+  --color-ocean-500: #1183D6;
+  --color-ocean-400: #36A0E8;
+
+  --color-cyan: #1BC4DC;
+  --color-teal: #2FD3C0;
+
+  --color-bg: #FFFFFF;
+  --color-bg-soft: #F1F8FF;
+  --color-bg-soft-2: #E5F1FC;
+  --color-bg-deep: #04263E;
+
+  /* Fonts */
+  --font-heading: "Bricolage Grotesque", sans-serif;
+  --font-body: "Plus Jakarta Sans", sans-serif;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(8, 70, 124, 0.08);
+  --shadow-md: 0 18px 40px -18px rgba(8, 70, 124, 0.34);
+  --shadow-lg: 0 40px 80px -28px rgba(8, 70, 124, 0.42);
+  --shadow-glow: 0 20px 50px -12px rgba(17, 131, 214, 0.55);
+
+  /* Border radius */
+  --radius-sm: 14px;
+  --radius-md: 20px;
+  --radius-lg: 28px;
+  --radius-xl: 36px;
+
+  /* Easing */
+  --ease-spring: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  /* Border colors (used as CSS vars in components) */
+  --line: rgba(11, 111, 190, 0.14);
+  --line-strong: rgba(11, 111, 190, 0.22);
+}
+
+@utility grad-text {
+  background: linear-gradient(135deg, #0B6FBE 0%, #1183D6 42%, #1BC4DC 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility grad-ocean {
+  background: linear-gradient(135deg, #0B6FBE 0%, #1183D6 42%, #1BC4DC 100%);
+}
+
+@utility grad-ocean-soft {
+  background: linear-gradient(135deg, #36A0E8 0%, #1BC4DC 100%);
+}
+
+@utility glass {
+  background: rgba(255, 255, 255, 0.66);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+@utility line {
+  border-color: rgba(11, 111, 190, 0.14);
+}
+
+@utility line-strong {
+  border-color: rgba(11, 111, 190, 0.22);
+}
+
+/* Section vertical spacing - matches reference */
+.sec { padding-block: 16px; }
+
+/* Page container - matches reference */
+.wrap {
+  width: min(1200px, 92vw);
+  margin-inline: auto;
+}
+
+/* Grain overlay */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s var(--ease-spring), transform 0.8s var(--ease-spring);
+}
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (max-width: 480px) {
+  .sec { padding-block: 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

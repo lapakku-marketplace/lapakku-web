@@ -1,0 +1,92 @@
+---
+import "../styles/global.css";
+
+export interface Props {
+    title?: string;
+    description?: string;
+    ogImage?: string;
+}
+
+const {
+    title = "Lapakku — Bangun Toko Online-mu Tanpa Ribet",
+    description = "Platform all-in-one untuk bikin toko online yang cantik dalam hitungan menit. Fitur selengkap marketplace — checkout, ongkir, voucher, chat — tapi tokomu, brandmu, datamu sendiri.",
+    ogImage = "/og-image.svg",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <meta name="robots" content="index, follow" />
+
+        <!-- Canonical -->
+        <link rel="canonical" href="https://lapakku.id/" />
+        
+        <!-- Open Graph -->
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={ogImage} />
+        <meta property="og:url" content="https://lapakku.id/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content="id_ID" />
+
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+            rel="stylesheet"
+        />
+
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    </head>
+    <body class="font-body text-ink bg-white overflow-x-hidden antialiased">
+        <div class="grain" aria-hidden="true"></div>
+        <slot />
+
+        <script>
+            const revealEls = document.querySelectorAll(".reveal");
+            if (revealEls.length) {
+                const observer = new IntersectionObserver(
+                    (entries) => {
+                        entries.forEach((e, i) => {
+                            if (e.isIntersecting) {
+                                setTimeout(
+                                    () => e.target.classList.add("in"),
+                                    (i % 4) * 70,
+                                );
+                                observer.unobserve(e.target);
+                            }
+                        });
+                    },
+                    { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
+                );
+                revealEls.forEach((el) => observer.observe(el));
+            }
+        </script>
+    </body>
+</html>
+
+<style is:global>
+    h1,
+    h2,
+    h3,
+    h4 {
+        font-family: var(--font-heading);
+        line-height: 1.05;
+        letter-spacing: -0.02em;
+        font-weight: 700;
+    }
+    ::selection {
+        background: rgba(27, 196, 220, 0.3);
+    }
+    .btn-primary-glow {
+        box-shadow:
+            0 20px 50px -12px rgba(17, 131, 214, 0.55),
+            inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    }
+</style>
