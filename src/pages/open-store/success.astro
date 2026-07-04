@@ -1,0 +1,197 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Icon from "../../components/ui/Icon.astro";
+
+const email = Astro.url.searchParams.get("email") || "";
+
+const timelineSteps = [
+  {
+    title: "Verifikasi Email",
+    desc: "Kami kirim link verifikasi ke email kamu. Klik untuk mengaktifkan akun.",
+    status: "active",
+    icon: "mail" as const,
+  },
+  {
+    title: "Setup Toko",
+    desc: "Setelah verifikasi, kami siapkan toko kamu. Prosesnya hanya butuh ~5 menit.",
+    status: "pending",
+    icon: "settings" as const,
+  },
+  {
+    title: "Siap Jualan!",
+    desc: "Toko online kamu live dan siap menerima pesanan pertama.",
+    status: "pending",
+    icon: "check" as const,
+  },
+];
+---
+
+<Layout
+  title="Toko Sedang Disiapkan — Lapakku"
+  description="Toko online kamu sedang disiapkan. Verifikasi email dulu, lalu kami setup toko kamu dalam ~5 menit."
+>
+  <main class="min-h-screen bg-gradient-to-b from-[#F4FAFF] to-white py-12">
+    <div class="wrap max-w-[560px] w-full px-5">
+
+      <a
+        href="/"
+        class="reveal inline-flex items-center gap-2 font-heading font-extrabold text-xl -tracking-[.03em] mb-8 mx-auto w-fit"
+        aria-label="Kembali ke Beranda Lapakku"
+      >
+        <span class="relative flex-none w-[34px] h-[34px] rounded-[11px] grad-ocean shadow-glow grid place-items-center overflow-hidden">
+          <span class="absolute inset-0 bg-gradient-to-b from-white/50 to-transparent"></span>
+          <Icon name="bag" class="relative z-10 text-white" size={20} />
+        </span>
+        <b class="text-ocean-700">Lapakku</b>
+      </a>
+
+      <section class="reveal text-center" aria-labelledby="success-heading">
+        <div class="relative w-20 h-20 mx-auto mb-6 grid place-items-center">
+          <div class="absolute inset-0 rounded-full bg-teal/20 animate-ping-slow"></div>
+          <div class="absolute inset-2 rounded-full bg-teal/30"></div>
+          <div class="relative w-16 h-16 rounded-full bg-teal grid place-items-center shadow-lg shadow-teal/30" id="check-anim">
+            <Icon name="check" size={32} class="text-white" />
+          </div>
+        </div>
+        <h1 id="success-heading" class="text-[clamp(1.6rem,3vw,2.1rem)] font-extrabold -tracking-[.035em] mb-2">
+          Toko Kamu Sedang Dibangun
+        </h1>
+        <p class="text-ink-soft text-[clamp(.95rem,1.1vw,1.05rem)] max-w-[24em] mx-auto">
+          Kami sedang menyiapkan semuanya. Nggak perlu nunggu lama.
+        </p>
+      </section>
+
+      <section class="reveal mt-6" aria-labelledby="timeline-heading">
+        <h4 id="timeline-heading" class="font-bold text-sm text-ink mb-5 flex items-center gap-2 uppercase tracking-wider">
+          <Icon name="clock" size={16} class="text-ocean-500" />
+          Langkah Selanjutnya
+        </h4>
+
+        <ol class="relative border-l border-gray-200 ml-3 space-y-8">
+          {timelineSteps.map((step) => (
+            <li class="ml-6">
+              <span
+                class={`absolute -left-[13px] flex items-center justify-center w-6 h-6 rounded-full ring-4 ring-white ${
+                  step.status === "active"
+                    ? "bg-ocean-500 animate-pulse-soft"
+                    : "bg-gray-300"
+                }`}
+              >
+                <Icon name={step.icon} size={12} class="text-white" />
+              </span>
+              <h5 class={`text-base font-bold mb-1 ${step.status === "active" ? "text-ocean-700" : "text-ink"}`}>
+                {step.title}
+                {step.status === "active" && (
+                  <span class="ml-2 text-[10px] font-bold uppercase bg-ocean-100 text-ocean-700 px-2 py-0.5 rounded-full align-middle">
+                    Sedang Berjalan
+                  </span>
+                )}
+              </h5>
+              <p class="text-sm text-ink-faint leading-relaxed">{step.desc}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section class="reveal mt-6 bg-white/70 backdrop-blur-xl border border-[var(--line)] rounded-[var(--radius-lg)] shadow-lg p-6 flex items-start gap-4">
+        <span class="flex-none w-10 h-10 rounded-full bg-ocean-500/10 grid place-items-center">
+          <Icon name="mail" size={20} class="text-ocean-500" />
+        </span>
+        <div class="flex-1 min-w-0">
+          <h3 class="font-bold text-ink text-base mb-1">Cek Email Secara Berkala</h3>
+          <p class="text-sm text-ink-soft leading-relaxed">
+            Kami akan mengirim email konfirmasi ke alamat berikut begitu tokomu sudah siap dan live:
+          </p>
+          <div class="mt-3 inline-flex items-center gap-1.5 bg-ocean-50 border border-ocean-100 text-ocean-700 px-3 py-1.5 rounded-lg text-sm font-medium break-all">
+            <Icon name="mail" size={14} />
+            <span>{email || "email kamu belum diisi"}</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="reveal mt-6 bg-gradient-to-br from-ocean-700 to-ocean-500 rounded-[var(--radius-lg)] shadow-lg p-6 text-white">
+        <div class="flex items-start gap-3">
+          <span class="flex-none w-10 h-10 rounded-xl bg-white/15 grid place-items-center backdrop-blur-sm">
+            <Icon name="star" size={20} class="text-white" />
+          </span>
+          <div>
+            <h3 class="font-bold text-base mb-3">Sambil nunggu, kamu bisa</h3>
+            <ul class="space-y-2">
+              <li class="flex items-center gap-2 text-sm text-white/85">
+                <Icon name="check" size={14} class="flex-none text-teal" />
+                Siapkan foto produk berkualitas
+              </li>
+              <li class="flex items-center gap-2 text-sm text-white/85">
+                <Icon name="check" size={14} class="flex-none text-teal" />
+                Tulis deskripsi & harga produk
+              </li>
+              <li class="flex items-center gap-2 text-sm text-white/85">
+                <Icon name="check" size={14} class="flex-none text-teal" />
+                Siapkan logo toko & banner
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="reveal mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a
+          href="/"
+          class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full font-semibold bg-white/80 backdrop-blur-md text-ink border border-[var(--line-strong)] shadow-sm px-6 py-3 text-sm hover:-translate-y-0.5 hover:border-ocean-400 hover:shadow-md transition-all duration-300"
+        >
+          <Icon name="arrow-left" size={18} />
+          Kembali ke Beranda
+        </a>
+        <a
+          href="mailto:support@lapakku.id"
+          class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full font-semibold text-white px-6 py-3 text-sm grad-ocean shadow-glow hover:-translate-y-0.5 transition-all duration-300"
+        >
+          <Icon name="mail" size={18} />
+          Hubungi Support
+        </a>
+      </section>
+
+      <footer class="reveal mt-6 text-center">
+        <p class="text-xs text-ink-faint">
+          Punya pertanyaan? Baca <a href="#" class="text-ocean-500 hover:text-ocean-700 font-medium underline underline-offset-2 transition-colors">Pusat Bantuan</a> kami.
+        </p>
+      </footer>
+
+    </div>
+  </main>
+</Layout>
+
+<style>
+  @keyframes checkPop {
+    0% { transform: scale(0); opacity: 0; }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  #check-anim {
+    animation: checkPop 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) 0.2s forwards;
+  }
+
+  @keyframes ping-slow {
+    0% { transform: scale(1); opacity: 0.5; }
+    75%, 100% { transform: scale(1.8); opacity: 0; }
+  }
+  .animate-ping-slow {
+    animation: ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+
+  @keyframes pulse-soft {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(17, 131, 214, 0.4); }
+    50% { box-shadow: 0 0 0 8px rgba(17, 131, 214, 0); }
+  }
+  .animate-pulse-soft {
+    animation: pulse-soft 2s infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #check-anim, .animate-ping-slow, .animate-pulse-soft {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+</style>

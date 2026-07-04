@@ -12,9 +12,9 @@ import SectionHeader from "./ui/SectionHeader.astro";
       center
     >
       <div class="inline-flex gap-1 p-1.5 bg-[var(--color-bg-soft-2)] rounded-full border line mt-8 flex-wrap justify-center" id="tplTabs">
-        {["fashion", "fnb", "elektronik", "jasa"].map((cat, i) => (
+        {["fashion", "fnb", "electronics", "services"].map((cat, i) => (
           <button class="tab ${i === 0 ? 'active' : ''}" data-cat={cat}>
-            {cat === "fashion" ? "Fashion" : cat === "fnb" ? "F&B" : cat === "elektronik" ? "Elektronik" : "Jasa"}
+            {cat === "fashion" ? "Fashion" : cat === "fnb" ? "F&B" : cat === "electronics" ? "Elektronik" : "Jasa"}
           </button>
         ))}
       </div>
@@ -62,12 +62,12 @@ import SectionHeader from "./ui/SectionHeader.astro";
       { nm: 'Dapur Bunda', cat: 'Frozen food', g: 'linear-gradient(135deg,#0E84D6,#1BC4DC)' },
       { nm: 'Manis Manja', cat: 'Bakery & kue', g: 'linear-gradient(135deg,#06304F,#0B6FBE)' },
     ],
-    elektronik: [
+    electronics: [
       { nm: 'GadgetPro', cat: 'Gawai & aksesori', g: 'linear-gradient(135deg,#042438,#0A5C9C)' },
       { nm: 'SoundLab', cat: 'Audio premium', g: 'linear-gradient(135deg,#0B6FBE,#2FD3C0)' },
       { nm: 'PixelGear', cat: 'Kamera & drone', g: 'linear-gradient(135deg,#1183D6,#36A0E8)' },
     ],
-    jasa: [
+    services: [
       { nm: 'Studio Rupa', cat: 'Jasa desain', g: 'linear-gradient(135deg,#0A5C9C,#1BC4DC)' },
       { nm: 'KelasKita', cat: 'Kursus online', g: 'linear-gradient(135deg,#062E4A,#1183D6)' },
       { nm: 'BookMe', cat: 'Reservasi & booking', g: 'linear-gradient(135deg,#0E84D6,#2FD3C0)' },
