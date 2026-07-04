@@ -150,15 +150,15 @@ import Icon from "./ui/Icon.astro";
                             class="text-xs opacity-85 uppercase tracking-wider font-semibold"
                             >Flash Sale · Berakhir 02:14:55</small
                         >
-                        <h5 class="font-heading text-lg font-bold mt-0.5">
+                        <p class="font-heading text-lg font-bold mt-0.5">
                             Diskon s/d 70%
-                        </h5>
+                        </p>
                         <span
                             class="inline-block mt-2 bg-white text-ocean-700 text-xs font-bold px-2.5 py-1 rounded-full"
                             >Belanja sekarang</span
                         >
                     </div>
-                    <div class="grid grid-cols-3 gap-3 px-4 pb-5 pt-1">
+                    <div class="grid grid-cols-3 gap-[.7rem] px-[1.1rem] pb-[1.2rem] pt-[.2rem]">
                         {
                             [
                                 { nm: "Tas Kulit Premium", pr: "Rp 249.000", rt: "★ 4.9 · 1,2rb", g: "from-[#E5F1FC] to-[#D2E9FA]" },
@@ -168,16 +168,16 @@ import Icon from "./ui/Icon.astro";
                                 { nm: "Dompet Kulit", pr: "Rp 129.000", rt: "★ 4.9 · 2,1rb", g: "from-[#E5F1FC] to-[#CFE9FA]" },
                                 { nm: "Topi Bucket", pr: "Rp 89.000", rt: "★ 4.8 · 750", g: "from-[#E6F8F4] to-[#CDEFEC]" },
                             ].map((p) => (
-                                <div class="border line rounded-xl overflow-hidden bg-white hover:-translate-y-1 transition-transform duration-300">
+                                <div class="border line rounded-[12px] overflow-hidden bg-white hover:-translate-y-[3px] transition-transform duration-300">
                                     <div class={`h-[54px] bg-gradient-to-br ${p.g}`} />
-                                    <div class="px-2 py-1.5 pb-2">
+                                    <div class="px-[.5rem] pt-[.4rem] pb-[.55rem]">
                                         <div class="text-[10px] text-ink-soft font-semibold">
                                             {p.nm}
                                         </div>
-                                        <div class="text-xs font-extrabold text-ocean-700 mt-0.5">
+                                        <div class="text-[.72rem] font-extrabold text-ocean-700 mt-[.1rem]">
                                             {p.pr}
                                         </div>
-                                        <div class="text-[9px] text-ink-faint mt-0.5">
+                                        <div class="text-[.55rem] text-ink-faint mt-[.1rem]">
                                             {p.rt}
                                         </div>
                                     </div>

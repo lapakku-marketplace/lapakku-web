@@ -14,8 +14,9 @@ import Icon from "./ui/Icon.astro";
                 class="max-lg:col-span-2 max-sm:col-span-1 max-md:text-center max-sm:text-left"
             >
                 <a
-                    href="#"
+                    href="/"
                     class="inline-flex items-center gap-2 font-heading font-extrabold text-[clamp(1.1rem,1.8vw,1.32rem)] -tracking-[.03em] mb-4 max-md:justify-center max-sm:justify-start"
+                    aria-label="Lapakku Beranda"
                 >
                     <span
                         class="relative flex-none w-[38px] h-[38px] max-md:w-[34px] max-md:h-[34px] rounded-[11px] grad-ocean shadow-glow grid place-items-center overflow-hidden"
@@ -105,9 +106,9 @@ import Icon from "./ui/Icon.astro";
                     },
                 ].map((col) => (
                     <div>
-                        <h5 class="text-[.78rem] uppercase tracking-widest text-ink-faint mb-4 font-body font-bold">
+                        <h3 class="text-[.78rem] uppercase tracking-widest text-ink-faint mb-4 font-body font-bold">
                             {col.title}
-                        </h5>
+                        </h3>
                         {col.links.map((l) => (
                             <a
                                 href="#"

@@ -5,12 +5,14 @@ export interface Props {
     title?: string;
     description?: string;
     ogImage?: string;
+    noindex?: boolean;
 }
 
 const {
     title = "Lapakku — Bangun Toko Online-mu Tanpa Ribet",
     description = "Platform all-in-one untuk bikin toko online yang cantik dalam hitungan menit. Fitur selengkap marketplace — checkout, ongkir, voucher, chat — tapi tokomu, brandmu, datamu sendiri.",
     ogImage = "/og-image.svg",
+    noindex = false,
 } = Astro.props;
 ---
 
@@ -21,7 +23,7 @@ const {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>{title}</title>
         <meta name="description" content={description} />
-        <meta name="robots" content="index, follow" />
+        <meta name="robots" content={noindex ? "noindex, follow" : "index, follow"} />
 
         <!-- Canonical -->
         <link rel="canonical" href="https://lapakku.id/" />
@@ -37,10 +39,14 @@ const {
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
+        <link rel="preload"
             href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
-            rel="stylesheet"
+            as="style"
+            onload="this.onload=null;this.rel='stylesheet'"
         />
+        <noscript><link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        /></noscript>
 
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     </head>

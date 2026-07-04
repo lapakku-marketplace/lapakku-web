@@ -29,6 +29,7 @@ const timelineSteps = [
 <Layout
   title="Toko Sedang Disiapkan — Lapakku"
   description="Toko online kamu sedang disiapkan. Verifikasi email dulu, lalu kami setup toko kamu dalam ~5 menit."
+  noindex={true}
 >
   <main class="min-h-screen bg-gradient-to-b from-[#F4FAFF] to-white py-12">
     <div class="wrap max-w-[560px] w-full px-5">
@@ -62,10 +63,10 @@ const timelineSteps = [
       </section>
 
       <section class="reveal mt-6" aria-labelledby="timeline-heading">
-        <h4 id="timeline-heading" class="font-bold text-sm text-ink mb-5 flex items-center gap-2 uppercase tracking-wider">
+        <h2 id="timeline-heading" class="font-bold text-sm text-ink mb-5 flex items-center gap-2 uppercase tracking-wider">
           <Icon name="clock" size={16} class="text-ocean-500" />
           Langkah Selanjutnya
-        </h4>
+        </h2>
 
         <ol class="relative border-l border-gray-200 ml-3 space-y-8">
           {timelineSteps.map((step) => (
@@ -79,14 +80,14 @@ const timelineSteps = [
               >
                 <Icon name={step.icon} size={12} class="text-white" />
               </span>
-              <h5 class={`text-base font-bold mb-1 ${step.status === "active" ? "text-ocean-700" : "text-ink"}`}>
+              <h3 class={`text-base font-bold mb-1 ${step.status === "active" ? "text-ocean-700" : "text-ink"}`}>
                 {step.title}
                 {step.status === "active" && (
                   <span class="ml-2 text-[10px] font-bold uppercase bg-ocean-100 text-ocean-700 px-2 py-0.5 rounded-full align-middle">
                     Sedang Berjalan
                   </span>
                 )}
-              </h5>
+              </h3>
               <p class="text-sm text-ink-faint leading-relaxed">{step.desc}</p>
             </li>
           ))}
@@ -153,7 +154,7 @@ const timelineSteps = [
 
       <footer class="reveal mt-6 text-center">
         <p class="text-xs text-ink-faint">
-          Punya pertanyaan? Baca <a href="#" class="text-ocean-500 hover:text-ocean-700 font-medium underline underline-offset-2 transition-colors">Pusat Bantuan</a> kami.
+          Punya pertanyaan? Baca <a href="/bantuan" class="text-ocean-500 hover:text-ocean-700 font-medium underline underline-offset-2 transition-colors">Pusat Bantuan</a> kami.
         </p>
       </footer>
 
